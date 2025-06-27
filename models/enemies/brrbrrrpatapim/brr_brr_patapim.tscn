@@ -1,24 +1,26 @@
-[gd_scene load_steps=9 format=3 uid="uid://b52yl4osunsxy"]
+[gd_scene load_steps=10 format=3 uid="uid://bm3q88wam0dwa"]
 
-[ext_resource type="PackedScene" uid="uid://c837x3t5sq6dk" path="res://models/enemies/brrbrrrpatapim/brr-brr-patapim.fbx" id="1_63t4a"]
-[ext_resource type="Animation" uid="uid://b2yqefq8weds" path="res://models/enemies/brrbrrrpatapim/brrbrrDying.res" id="2_3rsuw"]
-[ext_resource type="Animation" uid="uid://b445cyh6ot0fs" path="res://models/enemies/brrbrrrpatapim/brrbrrHit.res" id="3_yqqta"]
-[ext_resource type="Animation" uid="uid://ygb4srpglpel" path="res://models/enemies/brrbrrrpatapim/brrbrrWalking.res" id="4_i6chq"]
-[ext_resource type="Animation" uid="uid://dnjhe5d1tqasx" path="res://models/enemies/brrbrrrpatapim/brrbrrAttack.res" id="5_nkdcl"]
-[ext_resource type="Animation" uid="uid://3bkgmj50t8mu" path="res://models/enemies/brrbrrrpatapim/brrbrranim.res" id="6_8nsco"]
-[ext_resource type="Animation" uid="uid://dsr5culjrrpmd" path="res://models/enemies/brrbrrrpatapim/brrbrrRunning.res" id="7_hohdb"]
+[ext_resource type="PackedScene" uid="uid://bvsrrdhy4sjrq" path="res://models/enemies/brrbrrrpatapim/brr-brr-patapim.fbx" id="1_bv0cm"]
+[ext_resource type="Animation" uid="uid://8k3ls8v37v5c" path="res://animations/dying.res" id="2_6g61c"]
+[ext_resource type="Animation" uid="uid://kd3s27f6giyt" path="res://animations/impact.res" id="3_20l6b"]
+[ext_resource type="Animation" uid="uid://df7g7nnsw0bn" path="res://animations/hit.res" id="3_aiqsv"]
+[ext_resource type="Animation" uid="uid://cu5lav5tghc62" path="res://animations/running.res" id="4_aiqsv"]
+[ext_resource type="Animation" uid="uid://uofrosq323xn" path="res://animations/slash.res" id="5_h20ir"]
+[ext_resource type="Animation" uid="uid://bucbndq2g865x" path="res://animations/walking.res" id="6_1k8gp"]
+[ext_resource type="Animation" uid="uid://b1lsj4ayi6x4y" path="res://animations/swiping.res" id="7_h20ir"]
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_wfcqp"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_exkov"]
 _data = {
-&"brrbrrAttack": ExtResource("5_nkdcl"),
-&"brrbrrDying": ExtResource("2_3rsuw"),
-&"brrbrrHit": ExtResource("3_yqqta"),
-&"brrbrrRunning": ExtResource("7_hohdb"),
-&"brrbrrWalking": ExtResource("4_i6chq"),
-&"tpose": ExtResource("6_8nsco")
+&"dying": ExtResource("2_6g61c"),
+&"hit": ExtResource("3_aiqsv"),
+&"impact": ExtResource("3_20l6b"),
+&"running": ExtResource("4_aiqsv"),
+&"slash": ExtResource("5_h20ir"),
+&"swiping": ExtResource("7_h20ir"),
+&"walking": ExtResource("6_1k8gp")
 }
 
-[node name="brr-brr-patapim" instance=ExtResource("1_63t4a")]
+[node name="brr-brr-patapim" instance=ExtResource("1_bv0cm")]
 
 [node name="Skeleton3D" parent="." index="0"]
 bones/0/rotation = Quaternion(0.116102, -0.163039, -0.0301132, 0.979302)
@@ -70,5 +72,5 @@ bones/55/rotation = Quaternion(0.281151, 0.101837, -0.0248192, 0.953922)
 
 [node name="AnimationPlayer" parent="." index="1"]
 libraries = {
-&"": SubResource("AnimationLibrary_wfcqp")
+&"": SubResource("AnimationLibrary_exkov")
 }
