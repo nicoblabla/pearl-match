@@ -5,6 +5,6 @@ func _process(delta: float) -> void:
 	pass
 	
 func _integrate_forces(state):
-	if position.y < 0.1:
-		global_position.y = 0.1
+	if position.y < 1.2:
+		global_position.y = 1.2
 		linear_velocity.y = 0

@@ -17,8 +17,8 @@ func _process(delta):
 
 	# Move all soldiers forward
 	for soldier in soldiers:
-		soldier.linear_velocity.x = lerp(soldier.linear_velocity.x, 1.0, 1 * delta)
-		soldier.linear_velocity.z = lerp(soldier.linear_velocity.z, 0.0, 1 * delta)
+		soldier.linear_velocity.x = lerp(soldier.linear_velocity.x, 10.0, 10 * delta)
+		soldier.linear_velocity.z = lerp(soldier.linear_velocity.z, 0.0, 10 * delta)
 	
 	# Apply separation force to prevent crowding
 	for i in range(soldiers.size()):
@@ -37,10 +37,10 @@ func _process(delta):
 				var other_soldier = soldiers[j]
 				var distance = soldier.position.distance_to(other_soldier.position)
 				
-				if distance < 0.1:  # Adjust this threshold as needed
+				if distance < 1.2:  # Adjust this threshold as needed
 					var direction = (soldier.position - other_soldier.position).normalized()
 					direction.z = 0 
-					separation_force += direction * (0.1 - distance)  # Apply a force proportional to the distance
+					separation_force += direction * (1.2 - distance)  # Apply a force proportional to the distance
 				
 		soldier.linear_velocity += separation_force * delta * 50
 	
@@ -56,7 +56,7 @@ func _process(delta):
 
 func add_soldier():
 	var soldier = load("res://prefabs/soldier.tscn").instantiate()
-	soldier.position = Vector3(1.09, 1.153, 0 + randf()*0.5)
+	soldier.position = Vector3(10, 2, 0 + randf()*0.5)
 	add_child(soldier)
 	soldiers.append(soldier)
 
