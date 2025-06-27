@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://xomd5kxtgwb5"]
+
+[ext_resource type="Script" uid="uid://b34jbuk2keyxa" path="res://scripts/road_segment.gd" id="1_eeup2"]
+[ext_resource type="PackedScene" uid="uid://d4lfxhcks4iu0" path="res://models/road.glb" id="3_v2k6s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eeup2"]
+albedo_color = Color(0.101788, 0.104369, 0.12558, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_isxq7"]
+albedo_color = Color(0.754, 0.78, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v2k6s"]
+albedo_color = Color(0.2298, 0.229799, 0.229799, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eeup2"]
+size = Vector3(1.50537, 0.210999, 2.61587)
+
+[node name="RoadSegment" type="Node3D"]
+script = ExtResource("1_eeup2")
+
+[node name="RoadStraight" parent="." instance=ExtResource("3_v2k6s")]
+
+[node name="road" parent="RoadStraight" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_eeup2")
+surface_material_override/1 = SubResource("StandardMaterial3D_isxq7")
+surface_material_override/2 = SubResource("StandardMaterial3D_v2k6s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoadStraight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.204, -0.0827282, -0.0123202)
+shape = SubResource("BoxShape3D_eeup2")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="RoadStraight"]
+
+[editable path="RoadStraight"]
