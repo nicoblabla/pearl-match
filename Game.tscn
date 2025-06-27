@@ -1,12 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://cnt856ws56l5c"]
+[gd_scene load_steps=5 format=3 uid="uid://cnt856ws56l5c"]
 
+[ext_resource type="Script" uid="uid://3xudwx11veg0" path="res://scripts/game_manager.gd" id="1_sb48q"]
 [ext_resource type="PackedScene" uid="uid://xomd5kxtgwb5" path="res://prefabs/road_segment.tscn" id="1_wbfu4"]
+[ext_resource type="Script" uid="uid://dv6vky5tlbhq7" path="res://scripts/soldier_manager.gd" id="2_u44n3"]
 [ext_resource type="PackedScene" uid="uid://b2sjxdmoerkva" path="res://prefabs/soldier.tscn" id="2_xkndl"]
 
 [node name="Game" type="Node3D"]
+script = ExtResource("1_sb48q")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.0178015, 0, -0.999842, 0, 1, 0, 0.999842, 0, -0.0178015, 0, 0.546303, 0.0138099)
+[node name="CameraContainer" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CameraContainer"]
+transform = Transform3D(-0.0178015, 0, -0.999842, 0, 1, 0, 0.999842, 0, -0.0178015, -1.42626, 0.523252, 0.014)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.510063, 0.0153867, -0.86, 0.860137, -0.00912434, 0.509981, 0, -0.99984, -0.0178887, 0, 1.3832, 0)
@@ -16,6 +21,7 @@ transform = Transform3D(0.510063, 0.0153867, -0.86, 0.860137, -0.00912434, 0.509
 [node name="RoadSegment" parent="Roads" instance=ExtResource("1_wbfu4")]
 
 [node name="Soldiers" type="Node" parent="."]
+script = ExtResource("2_u44n3")
 
 [node name="Soldier" parent="Soldiers" instance=ExtResource("2_xkndl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.08992, 1.15277, 0)
