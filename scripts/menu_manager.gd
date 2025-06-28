@@ -38,4 +38,4 @@ func on_open_pressed() -> void:
 	flashScreen.position.y = start_y  # start off-screen
 
 	var tween = create_tween()
-	tween.tween_property(flashScreen, "position:y", target_y, 0.7).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(flashScreen, "position:y", target_y, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)

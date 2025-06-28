@@ -1,11 +1,34 @@
-[gd_scene load_steps=10 format=3 uid="uid://iwof4dsp0u21"]
+[gd_scene load_steps=20 format=3 uid="uid://iwof4dsp0u21"]
 
-[ext_resource type="Texture2D" uid="uid://sdw0m1kbxc5j" path="res://sprites/popup.jpg" id="1_uubjt"]
 [ext_resource type="Script" uid="uid://n2k7m8eu8kjh" path="res://scripts/menu_manager.gd" id="1_ylpcl"]
 [ext_resource type="Texture2D" uid="uid://d3ru2oskbob3j" path="res://sprites/app_store.png" id="2_5yleq"]
+[ext_resource type="Texture2D" uid="uid://bv03akoe3eec1" path="res://sprites/popup.png" id="2_n4eug"]
 [ext_resource type="Texture2D" uid="uid://cfg2aytyiorsj" path="res://sprites/loading.png" id="4_cx167"]
 [ext_resource type="Texture2D" uid="uid://brkaiskgkwr3j" path="res://sprites/open.png" id="5_dolsu"]
 [ext_resource type="Texture2D" uid="uid://cgued21upd6al" path="res://sprites/godot_icon.png" id="6_n4eug"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hcwhg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n4eug"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dlksc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n4eug"]
+bg_color = Color(1, 1, 1, 0.239216)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dlksc"]
+bg_color = Color(0.0980392, 0.0980392, 0.0980392, 0.0392157)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5p1lm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hcwhg"]
+bg_color = Color(0, 0, 0, 0.392157)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1igrg"]
 
 [sub_resource type="Animation" id="Animation_dolsu"]
 length = 0.001
@@ -45,6 +68,10 @@ _data = {
 &"spin": SubResource("Animation_cx167")
 }
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xucoo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n8j1b"]
+
 [node name="Menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -82,7 +109,7 @@ stretch_mode = 0
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/MarginContainer/AspectRatioContainer"]
 layout_mode = 2
-texture = ExtResource("1_uubjt")
+texture = ExtResource("2_n4eug")
 expand_mode = 4
 stretch_mode = 5
 
@@ -92,20 +119,23 @@ layout_mode = 2
 [node name="Button" type="Button" parent="VBoxContainer/HBoxContainer/MarginContainer/AspectRatioContainer/PanelContainer"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.729
-anchor_right = 0.921
-anchor_bottom = 0.914
-offset_left = -6.0
-offset_top = 0.179993
-offset_right = -0.180054
-offset_bottom = -0.119995
+anchor_left = 0.386
+anchor_top = 0.79
+anchor_right = 0.969
+anchor_bottom = 0.95
+offset_left = 0.119995
+offset_top = -0.200012
+offset_right = -0.0200195
 grow_horizontal = 0
 grow_vertical = 0
 pivot_offset = Vector2(100, 40)
 size_flags_horizontal = 4
 size_flags_vertical = 4
-text = "Play"
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hcwhg")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_n4eug")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_dlksc")
+theme_override_styles/hover = SubResource("StyleBoxFlat_n4eug")
+theme_override_styles/normal = SubResource("StyleBoxFlat_dlksc")
 
 [node name="AppStore" type="Control" parent="."]
 layout_mode = 1
@@ -138,15 +168,19 @@ stretch_mode = 5
 [node name="ButtonGet" type="Button" parent="AppStore/TextureRect"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.454
-anchor_top = 0.191
-anchor_right = 0.527
-anchor_bottom = 0.216
-offset_left = -8.74402
-offset_top = -12.976
-offset_right = 10.328
-offset_bottom = 5.62399
-text = "Get"
+anchor_left = 0.446
+anchor_top = 0.18
+anchor_right = 0.54
+anchor_bottom = 0.221
+offset_left = 0.343994
+offset_top = 0.519989
+offset_right = 0.559998
+offset_bottom = -0.056015
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5p1lm")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_hcwhg")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_hcwhg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hcwhg")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1igrg")
 
 [node name="TextureRect" type="ColorRect" parent="AppStore/TextureRect"]
 visible = false
@@ -205,9 +239,15 @@ anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.022
 offset_bottom = -0.0120049
-text = "Open"
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xucoo")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_hcwhg")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_hcwhg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hcwhg")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hcwhg")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_n8j1b")
 
 [node name="FlashScreen" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
