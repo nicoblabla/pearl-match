@@ -1,0 +1,69 @@
+class_name EnemyManager
+extends Node3D
+
+@export var enemy_spawn_data: Array[EnemySpawnData] = []
+@export var spawn_interval: float = 2.0
+@export var spawn_width: float = 20.0
+@export var spawn_height_offset: float = 5.0
+
+@export_range(1, 10, 1) var spawn_batch_size: int = 1  # Nombre d'ennemis à générer par batch
+
+
+var spawn_timer: float = 0.0
+var viewport_size: Vector2
+
+func _ready() -> void:
+	viewport_size = get_viewport().get_visible_rect().size
+
+func _process(delta: float) -> void:
+	spawn_timer += delta
+
+	if spawn_timer >= spawn_interval:
+		spawn_enemy()
+		spawn_timer = 0.0
+
+func select_random_enemy() -> PackedScene:
+	if enemy_spawn_data.is_empty():
+		return null
+
+	# Calcul de la somme totale des probabilités
+	var total_probability: float = 0.0
+	for data in enemy_spawn_data:
+		total_probability += data.spawn_chance
+
+	# Tirage aléatoire
+	var random_value = randf() * total_probability
+	var current_sum = 0.0
+
+	for data in enemy_spawn_data:
+		current_sum += data.spawn_chance
+		if random_value <= current_sum:
+			return data.enemy_scene
+
+	# Fallback au cas où
+	return enemy_spawn_data[0].enemy_scene
+
+func spawn_enemy() -> void:
+
+	var enemies_to_spawn = randi_range(1, spawn_batch_size)
+
+	# Position aléatoire derrière le haut de l'écran
+	var spawn_z = [-12, 0, 12].pick_random()
+	var spawn_x = SoldierManager.Instance.get_leader_position() + spawn_height_offset
+	for i in range(enemies_to_spawn):
+		var random_scene = select_random_enemy()
+		var enemy_instance = random_scene.instantiate()
+
+		# Générer une position aléatoire autour d'un cercle
+		var angle = randf() * 2.0 * PI
+		var radius = randf_range(3.0, 6.0)
+		var offset_x = radius * cos(angle)
+		var offset_z = radius * sin(angle)
+		enemy_instance.position = Vector3(spawn_x + offset_x, 0, spawn_z + offset_z)
+	
+		# Ajouter l'ennemi à la scène
+		self.add_child(enemy_instance)
+
+		var anim_player = enemy_instance.get_node_or_null("AnimationPlayer")
+		if anim_player:
+			anim_player.play("running")
