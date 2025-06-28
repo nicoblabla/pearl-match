@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpl3ekso630hv"]
+
+[ext_resource type="PackedScene" uid="uid://dnqgcq6pi4ol5" path="res://models/main_militar2.fbx" id="1_pakjj"]
+
+[node name="MainMilitar" type="Node3D"]
+
+[node name="main_militar2" parent="." instance=ExtResource("1_pakjj")]
