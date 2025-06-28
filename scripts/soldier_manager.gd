@@ -11,6 +11,8 @@ var lane_size = 10
 var lane_margin = 1
 var real_count = 0
 
+var CELL_SIZE = 2
+
 
 
 func _init():
@@ -21,11 +23,17 @@ func _ready() -> void:
 		add_soldier()
 	update_ui()
 
-	
+var grid := {}
+
 func _process(delta):
 	if false:
 		return
+	var limit_left = -lane_size / 2 + (lane_size + lane_margin) * lane
+	var limit_right = lane_size / 2 + (lane_size + lane_margin) * lane
 	var leader_position = get_leader_position()
+	
+
+
 	# Move all soldiers forward
 	for soldier in soldiers:
 		soldier.linear_velocity.x = lerp(soldier.linear_velocity.x, soldier.speed, 10 * delta)
@@ -47,8 +55,6 @@ func _process(delta):
 					separation_force.z = 0
 		else:
 			# Stay on their lane
-			var limit_left = -lane_size / 2 + (lane_size + lane_margin) * lane
-			var limit_right = lane_size / 2 + (lane_size + lane_margin) * lane
 			if soldier.position.z < limit_left:
 				separation_force.z = (limit_left - soldier.position.z) * 5
 			elif soldier.position.z >  limit_right:
@@ -57,21 +63,7 @@ func _process(delta):
 			# small force near the middle of the lane
 			if abs(soldier.position.z - middle_lane) > 0.5:
 				separation_force.z += sign(middle_lane - soldier.position.z) * 0.5
-				
-
 		
-		# Check distance to other soldiers and apply separation force
-		for j in range(soldiers.size()):
-			if i != j:
-				var other_soldier = soldiers[j]
-				var distance = soldier.position.distance_to(other_soldier.position)
-				if distance < 1.2:  # Adjust this threshold as needed
-					var direction = (soldier.position - other_soldier.position).normalized()
-					direction.z = 0
-					separation_force += direction * (1.2 - distance)
-					if distance < 0.5:  # If too close, push away more strongly
-						separation_force += direction * (0.5 - distance) * 5
-		# Speed up late soldier
 		var late = leader_position - soldier.position.x
 		if leader_position - soldier.position.x > 20:
 			separation_force.x += max(late * 0.5, 5)
@@ -82,14 +74,16 @@ func _process(delta):
 	# Remove any soldiers that are too far behind
 	# TODO
 
-
+func get_cell_coords(pos: Vector3) -> Vector2i:
+	return Vector2i(floor(pos.x / CELL_SIZE), floor(pos.z / CELL_SIZE))
+	
 func add_soldier():
 	print("adding soldier")
 	var soldier = soldier_prefab.instantiate()
 	soldier.position = Vector3(
 		get_leader_position() - 1,
 		5,
-		0 + randf_range(-lane_size/2, lane_size/2) + lane * (lane_size + lane_margin))
+		0 + randf_range(-lane_size/2., lane_size/2.) + lane * (lane_size + lane_margin))
 	soldier.add_to_group("soldier")
 	add_child(soldier)
 	soldiers.append(soldier)

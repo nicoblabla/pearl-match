@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cnt856ws56l5c"]
+[gd_scene load_steps=18 format=3 uid="uid://cnt856ws56l5c"]
 
 [ext_resource type="Script" uid="uid://3xudwx11veg0" path="res://scripts/game_manager.gd" id="1_sb48q"]
 [ext_resource type="PackedScene" uid="uid://xomd5kxtgwb5" path="res://prefabs/road_segment.tscn" id="1_wbfu4"]
@@ -7,12 +7,38 @@
 [ext_resource type="Script" uid="uid://s5fgmu5xcmos" path="res://scripts/road_objects.gd" id="4_sb48q"]
 [ext_resource type="Script" uid="uid://drcjhul77hgx2" path="res://scripts/ui_manager.gd" id="5_t88pq"]
 [ext_resource type="Script" path="res://scripts/ennemies_manager.gd" id="6_r0x5m"]
+[ext_resource type="Texture2D" uid="uid://dncmrescpqqmu" path="res://sprites/bullet.png" id="6_yhmtn"]
 [ext_resource type="Script" path="res://scripts/enemy_spawn_data.gd" id="7_2vekm"]
 [ext_resource type="PackedScene" uid="uid://dcred4y03q5pu" path="res://models/enemies/tungtungsahur/tung_tung_tung_sahur.tscn" id="7_3mrqo"]
 [ext_resource type="PackedScene" uid="uid://b52yl4osunsxy" path="res://models/enemies/brrbrrrpatapim/brr_brr_patapim.tscn" id="9_yx171"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_r0x5m"]
 font_size = 60
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gwjdr"]
+emission_shape_scale = Vector3(0, 1, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 6)
+angle_min = 1.07288e-05
+angle_max = 1.07288e-05
+inherit_velocity_ratio = 1.0
+velocity_pivot = Vector3(20, 2, 0)
+direction = Vector3(20, 0, 0)
+spread = 30.0
+flatness = 1.0
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = -1.60933e-05
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lvtmh"]
+transparency = 1
+albedo_texture = ExtResource("6_yhmtn")
+
+[sub_resource type="QuadMesh" id="QuadMesh_yyih5"]
+material = SubResource("StandardMaterial3D_lvtmh")
+orientation = 1
 
 [sub_resource type="Resource" id="Resource_yx171"]
 script = ExtResource("7_2vekm")
@@ -63,6 +89,13 @@ transform = Transform3D(0.510063, 0.0153867, -0.86, 0.860137, -0.00912434, 0.509
 
 [node name="Soldiers" type="Node" parent="."]
 script = ExtResource("2_u44n3")
+
+[node name="Particles" type="Node3D" parent="."]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Particles"]
+amount = 800
+process_material = SubResource("ParticleProcessMaterial_gwjdr")
+draw_pass_1 = SubResource("QuadMesh_yyih5")
 
 [node name="RoadObjects" type="Node3D" parent="."]
 script = ExtResource("4_sb48q")
