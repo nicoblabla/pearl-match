@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://52s67vw5rimh"]
+
+[ext_resource type="PackedScene" uid="uid://cwb1tkrbg8hwx" path="res://animations/homemade/Firing Rifle.fbx" id="1_nexeu"]
+[ext_resource type="PackedScene" uid="uid://cuq2ydhcuun1j" path="res://models/weapons/cannon.fbx" id="2_q2ys7"]
+
+[node name="Firing Rifle" instance=ExtResource("1_nexeu")]
+
+[node name="Skeleton3D" parent="." index="0"]
+bones/0/position = Vector3(0.0187034, 2.29884, 3.63455)
+bones/0/rotation = Quaternion(-0.0908566, -0.280185, 0.00968574, 0.955588)
+bones/1/rotation = Quaternion(0.145483, -0.0440796, 0.0408104, 0.987535)
+bones/2/rotation = Quaternion(0.0175293, -0.0201184, 0.00806621, 0.999611)
+bones/3/rotation = Quaternion(0.0174284, -0.0200598, 0.00841966, 0.999611)
+bones/4/rotation = Quaternion(0.0776255, 0.12075, -0.0457866, 0.988584)
+bones/5/rotation = Quaternion(0.150113, 0.0806435, 0.0490897, 0.984151)
+bones/7/rotation = Quaternion(0.675198, 0.316159, -0.533877, 0.398906)
+bones/8/rotation = Quaternion(0.103175, -0.3205, 0.329676, 0.882014)
+bones/9/rotation = Quaternion(-0.0311586, -0.000305707, 0.50249, 0.864022)
+bones/10/rotation = Quaternion(-0.0858987, -0.898223, -0.193204, 0.385342)
+bones/11/rotation = Quaternion(0.340839, -0.0213577, 0.00686663, 0.939854)
+bones/12/rotation = Quaternion(0.477743, 0.0551566, -0.117331, 0.86888)
+bones/13/rotation = Quaternion(0.215551, 0.0170249, 0.105544, 0.970623)
+bones/15/rotation = Quaternion(0.643903, -0.340894, 0.567293, 0.383873)
+bones/16/rotation = Quaternion(0.0980442, -0.104642, -0.562003, 0.814611)
+bones/17/rotation = Quaternion(-0.0495038, 0.000326315, -0.74778, 0.662099)
+bones/18/rotation = Quaternion(-0.28035, 0.830291, 0.184527, 0.444939)
+bones/19/rotation = Quaternion(-0.128594, 0.984722, 0.0317563, -0.113041)
+bones/20/rotation = Quaternion(0.400597, -0.162649, -0.373863, 0.820545)
+bones/21/rotation = Quaternion(0.172465, -0.219607, -0.142901, 0.94953)
+bones/23/rotation = Quaternion(0.277236, 0.151445, 0.946154, -0.0706943)
+bones/24/rotation = Quaternion(-0.648871, 0.0851273, -0.0599911, 0.753738)
+bones/25/rotation = Quaternion(0.366291, 0.167876, 0.0536074, 0.91366)
+bones/26/rotation = Quaternion(0.406425, 0.178373, -0.0334873, 0.895478)
+bones/28/rotation = Quaternion(-0.00659336, 0.199022, 0.979387, -0.0338967)
+bones/29/rotation = Quaternion(-0.446161, 0.00290249, -0.0670102, 0.892436)
+bones/30/rotation = Quaternion(0.564586, -0.145694, 0.0665312, 0.809685)
+bones/31/rotation = Quaternion(0.410426, -0.197822, 0.0371524, 0.889402)
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Skeleton3D" index="1"]
+transform = Transform3D(-0.989114, 0.0316265, 0.143712, 0.146332, 0.108535, 0.983263, 0.0154992, 0.993589, -0.111982, -0.925838, 3.12995, 4.43034)
+bone_name = "mixamorig_RightHand"
+bone_idx = 18
+
+[node name="cannon" parent="Skeleton3D/BoneAttachment3D" index="0" instance=ExtResource("2_q2ys7")]
+transform = Transform3D(0.702422, 0.615994, 0.356591, 0.398752, 0.0744232, -0.914035, -0.589579, 0.784229, -0.193353, -0.312025, 0.380097, 0.348897)
