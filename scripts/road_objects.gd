@@ -27,9 +27,9 @@ func spawn_wall(pos_x: float) -> void:
 func generate_wall_effect() -> Vector2i:
 	var effect_type = weighted_random_choice({
 		"nothing": 10,
-		"add_only": 2,
+		"add_only": 3,
 		"mul_only": 1,
-		"combined": 5,
+		"combined": 3,
 	})
 
 	match effect_type:
@@ -41,7 +41,7 @@ func generate_wall_effect() -> Vector2i:
 		"mul_only":
 			return Vector2i(0, randi_range(2, 4))
 		"combined":
-			var value = randi_range(-30, 3) # TODO Random between - soldier size and 3
+			var value = randi_range(-40, 3) # TODO Random between - soldier size and 3
 			var mult = randi_range(2, 5)
 			return Vector2i(value, mult)
 	print("Error: Unknown effect type: ", effect_type)

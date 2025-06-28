@@ -35,4 +35,4 @@ func on_trigger(body: Node) -> void:
 		count += addition
 		if multiply > 1:
 			count *= multiply
-		soldier_manager.resize(count)
+		soldier_manager.resize(count - soldier_manager.real_count)
