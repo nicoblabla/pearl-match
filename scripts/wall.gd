@@ -26,14 +26,13 @@ func set_neighbors(ws):
 	walls = ws
 
 func on_trigger(body: Node) -> void:
-	if enabled and body.is_in_group("soldier"):
+	if enabled and soldier_manager.get_leader_position() >= area.global_position.x + 1:
+		print("wall Canceled")
+	if enabled and body.is_in_group("soldier") and soldier_manager.get_leader_position() < area.global_position.x + 1:
 		for wall in walls:
-			print("Disabling wall: ", wall.name)
 			wall.enabled = false
 		var count = soldier_manager.real_count
-		print("Wall triggered, current count: ", count, " addition: ", addition, " multiply: ", multiply)
 		count += addition
 		if multiply > 1:
 			count *= multiply
-		print("New count: ", count)
 		soldier_manager.resize(count)

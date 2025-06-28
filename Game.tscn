@@ -1,25 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://cnt856ws56l5c"]
+[gd_scene load_steps=8 format=3 uid="uid://cnt856ws56l5c"]
 
 [ext_resource type="Script" uid="uid://3xudwx11veg0" path="res://scripts/game_manager.gd" id="1_sb48q"]
 [ext_resource type="PackedScene" uid="uid://xomd5kxtgwb5" path="res://prefabs/road_segment.tscn" id="1_wbfu4"]
 [ext_resource type="Script" uid="uid://dv6vky5tlbhq7" path="res://scripts/soldier_manager.gd" id="2_u44n3"]
+[ext_resource type="PackedScene" uid="uid://duajx7uxscl4" path="res://prefabs/game_over.tscn" id="3_r0x5m"]
 [ext_resource type="Script" uid="uid://s5fgmu5xcmos" path="res://scripts/road_objects.gd" id="4_sb48q"]
 [ext_resource type="Script" uid="uid://drcjhul77hgx2" path="res://scripts/ui_manager.gd" id="5_t88pq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_r0x5m"]
 font_size = 60
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t88pq"]
-bg_color = Color(0.815809, 0.41996, 0.837132, 1)
-corner_detail = 9
-
-[sub_resource type="LabelSettings" id="LabelSettings_3mrqo"]
-font_size = 30
-outline_size = 6
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_joorw"]
-bg_color = Color(0, 0.642742, 0.926019, 1)
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_sb48q")
@@ -40,38 +29,8 @@ text = "30 soldats"
 label_settings = SubResource("LabelSettings_r0x5m")
 horizontal_alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="UI"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Panel" type="Panel" parent="UI/CenterContainer"]
-custom_minimum_size = Vector2(400, 200)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_t88pq")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/CenterContainer/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="UI/CenterContainer/Panel/VBoxContainer"]
-layout_mode = 2
-text = "Game Over"
-label_settings = SubResource("LabelSettings_3mrqo")
-horizontal_alignment = 1
-
-[node name="Button" type="Button" parent="UI/CenterContainer/Panel/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_styles/normal = SubResource("StyleBoxFlat_joorw")
-text = "Try again"
+[node name="GameOver" parent="UI" instance=ExtResource("3_r0x5m")]
+visible = false
 
 [node name="CameraContainer" type="Node3D" parent="."]
 
