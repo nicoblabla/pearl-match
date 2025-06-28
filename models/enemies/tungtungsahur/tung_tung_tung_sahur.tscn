@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dcred4y03q5pu"]
+[gd_scene load_steps=11 format=3 uid="uid://dcred4y03q5pu"]
 
 [ext_resource type="PackedScene" uid="uid://pnm1gtkfc53w" path="res://models/enemies/tungtungsahur/tung-tung-tung-sahur.fbx" id="1_awyj4"]
 [ext_resource type="Animation" uid="uid://cu5lav5tghc62" path="res://animations/running.res" id="2_kv42q"]
@@ -20,7 +20,9 @@ _data = {
 &"walking": ExtResource("6_sxckf")
 }
 
-[node name="tung-tung-tung-sahur" instance=ExtResource("1_awyj4")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_mwg4o"]
+
+[node name="tung-tung-tung-sahur" groups=["enemy"] instance=ExtResource("1_awyj4")]
 transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, 0, 0, 0)
 
 [node name="Skeleton3D" parent="." index="0"]
@@ -57,3 +59,8 @@ bones/31/rotation = Quaternion(0.334598, 0.087417, 0.00453268, 0.938287)
 libraries = {
 &"": SubResource("AnimationLibrary_d30u6")
 }
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="2" groups=["enemy"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0" groups=["enemy"]]
+shape = SubResource("BoxShape3D_mwg4o")

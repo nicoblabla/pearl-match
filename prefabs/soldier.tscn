@@ -11,6 +11,7 @@ friction = 0.0
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5j5g3"]
 
 [node name="Soldier" type="RigidBody3D"]
+collision_mask = 2
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true

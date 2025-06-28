@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bm3q88wam0dwa"]
+[gd_scene load_steps=11 format=3 uid="uid://bm3q88wam0dwa"]
 
 [ext_resource type="PackedScene" uid="uid://bvsrrdhy4sjrq" path="res://models/enemies/brrbrrrpatapim/brr-brr-patapim.fbx" id="1_bv0cm"]
 [ext_resource type="Animation" uid="uid://8k3ls8v37v5c" path="res://animations/dying.res" id="2_6g61c"]
@@ -20,7 +20,9 @@ _data = {
 &"walking": ExtResource("6_1k8gp")
 }
 
-[node name="brr-brr-patapim" instance=ExtResource("1_bv0cm")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_aiqsv"]
+
+[node name="brr-brr-patapim" groups=["enemy"] instance=ExtResource("1_bv0cm")]
 transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, 0, 0, 0)
 
 [node name="Skeleton3D" parent="." index="0"]
@@ -75,3 +77,8 @@ bones/55/rotation = Quaternion(0.281151, 0.101837, -0.0248192, 0.953922)
 libraries = {
 &"": SubResource("AnimationLibrary_exkov")
 }
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="2" groups=["enemy"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0" groups=["enemy"]]
+shape = SubResource("BoxShape3D_aiqsv")

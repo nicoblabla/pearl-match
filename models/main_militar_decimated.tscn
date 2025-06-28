@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cj7wy064uxrbh" path="res://models/main_militar_decimated.fbx" id="1_86twd"]
 [ext_resource type="PackedScene" uid="uid://ckgh3tac5v3c8" path="res://models/weapons/simple_riffle_decimated.fbx" id="2_8kvfg"]
-[ext_resource type="Animation" uid="uid://ce2ke6c3e18x6" path="res://animations/homemade/walking.res" id="3_bxoow"]
+[ext_resource type="Animation" path="res://animations/homemade/walking.res" id="3_bxoow"]
 
 [sub_resource type="Animation" id="Animation_gg27f"]
 resource_name = "mixamo_com"
@@ -208,7 +208,7 @@ bones/30/rotation = Quaternion(0.564586, -0.145694, 0.0665323, 0.809685)
 bones/31/rotation = Quaternion(0.410426, -0.197822, 0.0371525, 0.889402)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Skeleton3D" index="2"]
-transform = Transform3D(-0.989114, 0.0316277, 0.14371, 0.146331, 0.108537, 0.983263, 0.0155006, 0.993589, -0.111984, -0.974827, 3.33198, 0.787513)
+transform = Transform3D(-0.989114, 0.0316279, 0.14371, 0.146331, 0.108537, 0.983263, 0.0155009, 0.993589, -0.111984, -0.974827, 3.33198, 0.787514)
 bone_name = "mixamorig_RightHand"
 bone_idx = 18
 

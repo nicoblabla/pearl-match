@@ -33,6 +33,12 @@ window/handheld/orientation=1
 
 enabled=PackedStringArray("res://addons/post_processing/plugin.cfg", "res://addons/postfx/plugin.cfg")
 
+[global_group]
+
+enemy=""
+wall=""
+road=""
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
