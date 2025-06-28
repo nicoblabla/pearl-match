@@ -1,6 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcp80riq5jv43"]
+[gd_scene load_steps=7 format=3 uid="uid://bj1wnwvy5uq71"]
 
-[ext_resource type="Script" uid="uid://fe2ceieyky8o" path="res://scripts/wall.gd" id="1_3uv27"]
+[ext_resource type="Script" path="res://scripts/wall.gd" id="1_3uv27"]
+
+[sub_resource type="Gradient" id="Gradient_3uv27"]
+colors = PackedColorArray(0, 1, 1, 1, 0.431763, 0.19413, 0.371238, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3usl3"]
+gradient = SubResource("Gradient_3uv27")
+fill = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aw5sf"]
+transparency = 1
+depth_draw_mode = 1
+albedo_color = Color(0.521569, 1, 1, 0.419608)
+albedo_texture = SubResource("GradientTexture2D_3usl3")
 
 [sub_resource type="BoxMesh" id="BoxMesh_iy8pp"]
 
@@ -15,6 +28,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 transform = Transform3D(0.2, 0, 0, 0, 5, 0, 0, 0, 11, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_aw5sf")
 mesh = SubResource("BoxMesh_iy8pp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
