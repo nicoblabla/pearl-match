@@ -29,6 +29,10 @@ window/size/viewport_height=1136
 window/stretch/mode="canvas_items"
 window/handheld/orientation=1
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/post_processing/plugin.cfg", "res://addons/postfx/plugin.cfg")
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
