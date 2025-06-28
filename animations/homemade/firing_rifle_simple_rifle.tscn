@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://c0dlaw687h24a"]
+[gd_scene load_steps=3 format=3 uid="uid://ffay5h8g4i13"]
 
 [ext_resource type="PackedScene" uid="uid://cwb1tkrbg8hwx" path="res://animations/homemade/Firing Rifle.fbx" id="1_rol5e"]
 [ext_resource type="PackedScene" uid="uid://ey47nrvekdel" path="res://models/weapons/simple_riffle.fbx" id="2_1a13h"]
@@ -37,7 +37,7 @@ bones/30/rotation = Quaternion(0.564586, -0.145694, 0.0665312, 0.809685)
 bones/31/rotation = Quaternion(0.410426, -0.197822, 0.0371524, 0.889402)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Skeleton3D" index="1"]
-transform = Transform3D(-0.989114, 0.0316265, 0.143712, 0.146332, 0.108535, 0.983263, 0.0154992, 0.993589, -0.111982, -0.925838, 3.12995, 4.43034)
+transform = Transform3D(-0.989114, 0.0316278, 0.143713, 0.146333, 0.108537, 0.983263, 0.0155002, 0.993589, -0.111984, -0.925837, 3.12995, 4.43034)
 bone_name = "mixamorig_RightHand"
 bone_idx = 18
 

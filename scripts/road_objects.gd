@@ -27,7 +27,7 @@ func spawn_wall(pos_x: float) -> void:
 func generate_wall_effect() -> Vector2i:
 	var effect_type = weighted_random_choice({
 		"nothing": 10,
-		"add_only": 20,
+		"add_only": 2,
 		"mul_only": 1,
 		"combined": 5,
 	})
@@ -36,7 +36,7 @@ func generate_wall_effect() -> Vector2i:
 		"nothing":
 			return Vector2i(0, 0)
 		"add_only":
-			var value =  randi_range(5, 30)
+			var value =  randi_range(-30, 30)
 			return Vector2i(value, 0)
 		"mul_only":
 			return Vector2i(0, randi_range(2, 4))
