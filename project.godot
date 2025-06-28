@@ -11,8 +11,11 @@ config_version=5
 [application]
 
 config/name="Pearl match"
-run/main_scene="uid://cnt856ws56l5c"
+run/main_scene="uid://dl65jw5rlu0kl"
 config/features=PackedStringArray("4.4", "GL Compatibility")
+boot_splash/show_image=false
+boot_splash/fullsize=false
+boot_splash/use_filter=false
 config/icon="res://icon.svg"
 
 [autoload]
@@ -23,6 +26,8 @@ GlobalManager="*res://scripts/global_manager.gd"
 
 window/size/viewport_width=640
 window/size/viewport_height=1136
+window/stretch/mode="canvas_items"
+window/handheld/orientation=1
 
 [rendering]
 
