@@ -2,7 +2,7 @@ extends Node3D
 
 @onready var road_segment = $RoadStraight
 @onready var road_size = road_segment.get_child(0).mesh.get_aabb().size * 20
-@export var road_length: float = 500.0  # Length of the road segment
+@export var road_length: float = 10  # Length of the road segment
 @export var min_gap: float = 0.01  # Minimum gap between buildings
 @export var max_gap: float = 0.02  # Maximum gap between buildings
 var buildings = [
@@ -42,7 +42,7 @@ func spawn_buildings():
 func populate_side(start_pos: Vector3, is_left: bool):
 	var x_pos = 0.0  # Starting at X = 0
 
-	while x_pos < road_length:
+	while x_pos < road_length * 20:
 		var building_path = buildings.pick_random()
 
 		var building = load(building_path).instantiate()
