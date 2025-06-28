@@ -8,6 +8,7 @@ extends Node3D
 
 @export_range(1, 10, 1) var spawn_batch_size: int = 1  # Nombre d'ennemis à générer par batch
 
+@onready var soldier_manager = SoldierManager.Instance
 
 var spawn_timer: float = 0.0
 var viewport_size: Vector2
@@ -16,6 +17,8 @@ func _ready() -> void:
 	viewport_size = get_viewport().get_visible_rect().size
 
 func _process(delta: float) -> void:
+	if soldier_manager.soldiers.size() <= 0:
+		return
 	spawn_timer += delta
 
 	if spawn_timer >= spawn_interval:
@@ -49,7 +52,7 @@ func spawn_enemy() -> void:
 
 	# Position aléatoire derrière le haut de l'écran
 	var spawn_z = [-12, 0, 12].pick_random()
-	var spawn_x = SoldierManager.Instance.get_leader_position() + spawn_height_offset
+	var spawn_x = soldier_manager.get_leader_position() + spawn_height_offset
 	for i in range(enemies_to_spawn):
 		var random_scene = select_random_enemy()
 		var enemy_instance = random_scene.instantiate()

@@ -6,6 +6,7 @@ static var Instance
 @onready var soldier_prefab = load("res://prefabs/soldier.tscn")
 @onready var ui_manager = UIManager.Instance
 @onready var camera = get_viewport().get_camera_3d()
+@onready var particles: GPUParticles3D = get_tree().get_root().get_node("Game/Particles/GPUParticles3D")
 
 var soldiers = []
 var lane = 0
@@ -21,8 +22,7 @@ func _init():
 	Instance = self
 
 func _ready() -> void:
-	for i in range(5):
-		add_soldier()
+	resize(5)
 	update_ui()
 	
 
@@ -33,10 +33,8 @@ func _process(delta):
 		return
 	var limit_left = -lane_size / 2 + (lane_size + lane_margin) * lane
 	var limit_right = lane_size / 2 + (lane_size + lane_margin) * lane
-	var leader_position = get_leader_position()
+	var leader = get_leader()
 	
-
-
 	# Move all soldiers forward
 	for soldier in soldiers:
 		if soldier.is_dead:
@@ -83,23 +81,19 @@ func _process(delta):
 			if abs(soldier.position.z - middle_lane) > 0.5:
 				separation_force.z += sign(middle_lane - soldier.position.z) * 0.5
 		
-		var late = leader_position - soldier.position.x
+		var late = leader.position.x - soldier.position.x
 		if late > 6 and soldiers.size() > 50:
 			separation_force.x -= late * 0.1
 			
 		separation_force.y = 0
 		soldier.linear_velocity += separation_force * delta * 10
+	if soldiers.size() > 0:
+		particles.emitting = true
+		particles.position.x = leader.position.x
+		particles.position.z = leader.position.z
+	else:
+		particles.emitting = false
 		
-#	for soldier in soldiers:
-#		if soldier.is_dead:
-#			soldier.queue_free()
-#			soldiers.erase(soldier)
-
-
-
-func get_cell_coords(pos: Vector3) -> Vector2i:
-	return Vector2i(floor(pos.x / CELL_SIZE), floor(pos.z / CELL_SIZE))
-	
 func add_soldier():
 	var soldier = soldier_prefab.instantiate()
 	soldier.position = Vector3(
@@ -113,18 +107,7 @@ func add_soldier():
 	return soldier
 
 # Get the soldier at the front of the group (x-axis)
-func get_leader_position() -> float:
-	if soldiers.size() == 0:
-		return 20
-	var max_x: float = 0
-	
-	for soldier in soldiers:
-		if soldier.position.x > max_x:
-			max_x = soldier.position.x
-			
-	return max_x
-	
-func get_leader() -> Node3D:
+func get_leader():
 	if soldiers.size() == 0:
 		return null
 	var max_x: float = 0
@@ -136,6 +119,11 @@ func get_leader() -> Node3D:
 			leader = soldier
 			
 	return leader
+	
+func get_leader_position():
+	if soldiers.size() == 0:
+		return 20
+	return get_leader().position.x
 
 func get_count():
 	return soldiers.size()
@@ -167,6 +155,7 @@ func resize(count_diff):
 	print("displaycount: " + str(display_count) + " realcount: " + str(real_count))
 	real_count = count
 	update_ui()
+	update_particles()
 
 var touch_start = Vector2.ZERO
 var min_swipe_distance = 100  # in pixels
@@ -213,3 +202,30 @@ func on_swipe(direction: float):
 
 func update_ui():
 	ui_manager.update_text(real_count, soldiers.size())
+
+var have_already_changed_bullets = false
+func update_particles():
+	var material = particles.process_material as ParticleProcessMaterial
+	particles.set_amount(min(real_count, 800))
+	var scale = get_scaled_value(real_count)
+	material.scale_max = scale
+	material.scale_min = scale
+	if real_count > 5000 and not have_already_changed_bullets:
+		var new_texture = load("res://textures/bullet_3.tres")
+		var mat := StandardMaterial3D.new()
+		mat.albedo_texture = new_texture
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		particles.draw_pass_1.material = mat
+		have_already_changed_bullets = true
+
+func get_scaled_value(real_count: float) -> float:
+	if real_count < 100:
+		return remap(real_count, 5, 100, 0.8, 1.5)
+	elif real_count < 1000:
+		return remap(real_count, 100, 1000, 1.5, 2.0)
+	elif real_count < 50000:
+		return remap(real_count, 1000, 50000, 2.0, 3.0)
+	elif real_count <= 10000000:
+		return remap(real_count, 50000, 10000000, 3.0, 4.0)
+	else:
+		return 4.0  # cap at max

@@ -26,8 +26,6 @@ func set_neighbors(ws):
 	walls = ws
 
 func on_trigger(body: Node) -> void:
-	if enabled and soldier_manager.get_leader_position() >= area.global_position.x + 1:
-		print("wall Canceled")
 	if enabled and body.is_in_group("soldier") and soldier_manager.get_leader_position() < area.global_position.x + 1:
 		for wall in walls:
 			wall.enabled = false

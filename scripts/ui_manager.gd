@@ -10,4 +10,4 @@ func _init():
 
 func update_text(real_count, display_count):
 	if counter != null:
-		counter.text = "Soldat: " + str(real_count) + "\ndisplayed: " + str(display_count)
+		counter.text = "Soldats: " + str(real_count)
