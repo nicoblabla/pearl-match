@@ -10,7 +10,8 @@ script = ExtResource("1_sb48q")
 [node name="CameraContainer" type="Node3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="CameraContainer"]
-transform = Transform3D(-0.014944, 0.543394, -0.839345, 0.00967323, 0.839478, 0.543308, 0.999842, 3.56363e-10, -0.0178015, -12.0961, 8.05287, 0)
+transform = Transform3D(-0.0209424, 0.50893, -0.860553, 0, 0.860742, 0.509041, 0.999781, 0.0106605, -0.018026, -50.1566, 44.9412, 0)
+fov = 47.5
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.510063, 0.0153867, -0.86, 0.860137, -0.00912434, 0.509981, 0, -0.99984, -0.0178887, 0, 1.3832, 0)
