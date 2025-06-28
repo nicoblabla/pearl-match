@@ -10,12 +10,12 @@ var target_position: float = 1000
 var is_changing_lane: bool = false
 var is_changing_lane_in: float = 0
 
-@onready var animation = $"Firing Rifle/AnimationPlayer"
+@onready var animation = $"main_militar2/AnimationPlayer"
 
 func _ready() -> void:
 	change_speed()
-	animation.get_animation("mixamo_com").loop = true
-	animation.play("mixamo_com", )
+	animation.get_animation("walking").loop = true
+	animation.play("walking", )
 	
 
 func _process(delta: float) -> void:
