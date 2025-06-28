@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b2sjxdmoerkva"]
 
 [ext_resource type="Script" uid="uid://xt2g0dhhx0vp" path="res://scripts/soldier.gd" id="1_5j5g3"]
-[ext_resource type="PackedScene" uid="uid://br8eefo8pk2y4" path="res://models/main_militar_2.tscn" id="3_31lcb"]
+[ext_resource type="PackedScene" uid="uid://u0akcy7v7b8k" path="res://models/main_militar_decimated.tscn" id="2_o3nc5"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5j5g3"]
 friction = 0.0
@@ -28,6 +28,5 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_5j5g3")
 
-[node name="main_militar2" parent="." instance=ExtResource("3_31lcb")]
-transform = Transform3D(-2.92866e-08, 0, 0.67, 0, 0.67, 0, -0.67, 0, -2.92866e-08, 0, 0, 0)
+[node name="main_militar_decimated" parent="." instance=ExtResource("2_o3nc5")]
 visible = false
