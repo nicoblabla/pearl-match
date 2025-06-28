@@ -71,6 +71,9 @@ text = "30 soldats"
 label_settings = SubResource("LabelSettings_r0x5m")
 horizontal_alignment = 1
 
+[node name="TextureRect" type="TextureRect" parent="UI/VBoxContainer"]
+layout_mode = 2
+
 [node name="GameOver" parent="UI" instance=ExtResource("3_r0x5m")]
 visible = false
 
