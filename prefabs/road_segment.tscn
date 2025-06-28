@@ -22,10 +22,10 @@ size = Vector3(1.2, 2.732, 0.752)
 script = ExtResource("1_eeup2")
 
 [node name="RoadStraight" parent="." instance=ExtResource("3_v2k6s")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -4.70291, 0)
 
 [node name="road" parent="RoadStraight" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.7, 1.015, 0.01, 0.176919)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.7, 1.015, 0.01, 0.202801)
 surface_material_override/0 = SubResource("StandardMaterial3D_eeup2")
 surface_material_override/1 = SubResource("StandardMaterial3D_isxq7")
 surface_material_override/2 = SubResource("StandardMaterial3D_v2k6s")

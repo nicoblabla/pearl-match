@@ -2,7 +2,7 @@ extends Node3D
 
 @onready var road_segment = $RoadStraight
 @onready var road_size = road_segment.get_child(0).mesh.get_aabb().size * 20
-@export var road_length: float = 300.0  # Length of the road segment
+@export var road_length: float = 500.0  # Length of the road segment
 @export var min_gap: float = 0.01  # Minimum gap between buildings
 @export var max_gap: float = 0.02  # Maximum gap between buildings
 var buildings = [
@@ -29,7 +29,6 @@ var buildings = [
 
 func _ready():
 	for i in range(road_length):
-		print(road_size)
 		var road = road_segment.duplicate()
 		road.position.x += (road_size.x) * i
 		add_child(road)
