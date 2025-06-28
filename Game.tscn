@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cnt856ws56l5c"]
+[gd_scene load_steps=8 format=3 uid="uid://cnt856ws56l5c"]
 
 [ext_resource type="Script" uid="uid://3xudwx11veg0" path="res://scripts/game_manager.gd" id="1_sb48q"]
 [ext_resource type="PackedScene" uid="uid://xomd5kxtgwb5" path="res://prefabs/road_segment.tscn" id="1_wbfu4"]
 [ext_resource type="Script" uid="uid://dv6vky5tlbhq7" path="res://scripts/soldier_manager.gd" id="2_u44n3"]
+[ext_resource type="PackedScene" uid="uid://duajx7uxscl4" path="res://prefabs/game_over.tscn" id="3_r0x5m"]
 [ext_resource type="Script" uid="uid://s5fgmu5xcmos" path="res://scripts/road_objects.gd" id="4_sb48q"]
 [ext_resource type="Script" uid="uid://drcjhul77hgx2" path="res://scripts/ui_manager.gd" id="5_t88pq"]
 
@@ -27,6 +28,9 @@ layout_mode = 2
 text = "30 soldats"
 label_settings = SubResource("LabelSettings_r0x5m")
 horizontal_alignment = 1
+
+[node name="GameOver" parent="UI" instance=ExtResource("3_r0x5m")]
+visible = false
 
 [node name="CameraContainer" type="Node3D" parent="."]
 
