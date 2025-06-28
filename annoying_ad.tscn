@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://qruv4vjqf4tq"]
 
-[ext_resource type="Script" uid="uid://b7yh1bxld0cub" path="res://scripts/annoying_add.gd" id="1_hpciq"]
+[ext_resource type="Script" uid="uid://b7yh1bxld0cub" path="res://scripts/annoying_add.gd" id="1_e7myw"]
 
 [sub_resource type="VideoStreamTheora" id="VideoStreamTheora_v7lre"]
 file = "videos/pub1.ogv"
@@ -28,7 +28,7 @@ offset_right = -512.0
 offset_bottom = 488.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_hpciq")
+script = ExtResource("1_e7myw")
 metadata/_edit_use_anchors_ = true
 
 [node name="VideoContainer" type="AspectRatioContainer" parent="."]

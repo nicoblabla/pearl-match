@@ -17,7 +17,8 @@ func _init():
 	Instance = self
 
 func _ready() -> void:
-	resize(5)
+	for i in range(5):
+		add_soldier()
 	update_ui()
 
 	
@@ -83,6 +84,7 @@ func _process(delta):
 
 
 func add_soldier():
+	print("adding soldier")
 	var soldier = soldier_prefab.instantiate()
 	soldier.position = Vector3(
 		get_leader_position() - 1,
@@ -91,6 +93,8 @@ func add_soldier():
 	soldier.add_to_group("soldier")
 	add_child(soldier)
 	soldiers.append(soldier)
+	real_count+=1
+	print("Soldier added, total count: " + str(real_count))
 	return soldier
 
 # Get the soldier at the front of the group (x-axis)
@@ -104,6 +108,19 @@ func get_leader_position() -> float:
 			max_x = soldier.position.x
 			
 	return max_x
+	
+func get_leader() -> Node3D:
+	if soldiers.size() == 0:
+		return null
+	var max_x: float = 0
+	var leader = null
+	
+	for soldier in soldiers:
+		if soldier.position.x > max_x:
+			max_x = soldier.position.x
+			leader = soldier
+			
+	return leader
 
 func get_count():
 	return soldiers.size()
@@ -111,7 +128,6 @@ func get_count():
 func resize(count):
 	print("current: " + str(soldiers.size()) + " new: " + str(count) + "real: " + str(real_count))
 	var display_count  = get_display_count(count)
-	real_count = count
 	if display_count <= 0:
 		for soldier in soldiers:
 			soldier.queue_free()
@@ -128,7 +144,7 @@ func resize(count):
 		for i in range(display_count - soldiers.size()):
 			add_soldier()
 	print("displaycount: " + str(display_count) + " realcount: " + str(real_count))
-	
+	real_count = count
 	update_ui()
 
 var touch_start = Vector2.ZERO
