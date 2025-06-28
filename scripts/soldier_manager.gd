@@ -1,18 +1,25 @@
 extends Node
+class_name SoldierManager
 
+static var Instance
+
+@onready var soldier_prefab = load("res://prefabs/soldier.tscn")
+@onready var ui_manager = UIManager.Instance
 var soldiers = []
 var lane = 0
 var lane_size = 10
 var lane_margin = 1
+var real_count = 0
+
+
+
+func _init():
+	Instance = self
 
 func _ready() -> void:
-	for i in range(50):
+	for i in range(5):
 		add_soldier()
-	var s1 = add_soldier()
-	s1.position.z = lane_size / 2
-	
-	var s2 = add_soldier()
-	s2.position.z = -lane_size / 2
+	update_ui()
 
 	
 func _process(delta):
@@ -23,22 +30,21 @@ func _process(delta):
 	for soldier in soldiers:
 		soldier.linear_velocity.x = lerp(soldier.linear_velocity.x, soldier.speed, 10 * delta)
 		soldier.linear_velocity.z = lerp(soldier.linear_velocity.z, 0.0, 10 * delta)
-		soldier.linear_velocity.y = min(soldier.linear_velocity.y, 0.1)
+		#soldier.linear_velocity.y = max(soldier.linear_velocity.y, 0.1)
 	
 	# Apply separation force to prevent crowding
 	for i in range(soldiers.size()):
 		var soldier = soldiers[i]
 		var separation_force = Vector3.ZERO
-
-
 			
 		# Changing lanes
 		if soldier.is_changing_lane:
-			var dist = soldier.target_position - soldier.position.z
-			separation_force.z += clamp(dist, -3, 3) * 5
-			if abs(dist) < 1:
-				soldier.is_changing_lane = false
-				separation_force.z = 0
+			if soldier.is_changing_lane_in <= 0:
+				var dist = soldier.target_position - soldier.position.z
+				separation_force.z += clamp(dist, -3, 3) * 5
+				if abs(dist) < 1:
+					soldier.is_changing_lane = false
+					separation_force.z = 0
 		else:
 			# Stay on their lane
 			var limit_left = -lane_size / 2 + (lane_size + lane_margin) * lane
@@ -47,6 +53,10 @@ func _process(delta):
 				separation_force.z = (limit_left - soldier.position.z) * 5
 			elif soldier.position.z >  limit_right:
 				separation_force.z = (limit_right - soldier.position.z) * 5
+			var middle_lane = (limit_left + limit_right) / 2
+			# small force near the middle of the lane
+			if abs(soldier.position.z - middle_lane) > 0.5:
+				separation_force.z += sign(middle_lane - soldier.position.z) * 0.5
 				
 
 		
@@ -74,16 +84,23 @@ func _process(delta):
 
 
 func add_soldier():
-	var soldier = load("res://prefabs/soldier.tscn").instantiate()
-	soldier.position = Vector3(10, 2, 0 + randf()*0.5)
+	print("adding soldier")
+	var soldier = soldier_prefab.instantiate()
+	soldier.position = Vector3(
+		get_leader_position() - 1,
+		5,
+		0 + randf_range(-lane_size/2, lane_size/2) + lane * (lane_size + lane_margin))
+	soldier.add_to_group("soldier")
 	add_child(soldier)
 	soldiers.append(soldier)
+	real_count+=1
+	print("Soldier added, total count: " + str(real_count))
 	return soldier
 
 # Get the soldier at the front of the group (x-axis)
 func get_leader_position() -> float:
 	if soldiers.size() == 0:
-		return 0
+		return 20
 	var max_x: float = 0
 	
 	for soldier in soldiers:
@@ -92,6 +109,30 @@ func get_leader_position() -> float:
 			
 	return max_x
 
+func get_count():
+	return soldiers.size()
+	
+func resize(count):
+	print("current: " + str(soldiers.size()) + " new: " + str(count) + "real: " + str(real_count))
+	var display_count  = get_display_count(count)
+	if display_count <= 0:
+		for soldier in soldiers:
+			soldier.queue_free()
+		soldiers.clear()
+		print("game over")
+	elif display_count < soldiers.size():
+		# Remove soldiers if count is less than current size
+		for i in range(soldiers.size() - 1, display_count - 1, -1):
+			var soldier = soldiers[i]
+			soldier.queue_free()
+			soldiers.erase(soldier)
+	else:
+		# Add soldiers if count is greater than current size
+		for i in range(display_count - soldiers.size()):
+			add_soldier()
+	print("displaycount: " + str(display_count) + " realcount: " + str(real_count))
+	real_count = count
+	update_ui()
 
 var touch_start = Vector2.ZERO
 var min_swipe_distance = 100  # in pixels
@@ -116,19 +157,25 @@ func _input(event):
 				on_swipe_left()
 			elif event.keycode == KEY_RIGHT || event.keycode == KEY_D:
 				on_swipe_right()
-
+func get_display_count(real_count):
+	if real_count < 30:
+		return real_count
+	return 33.2 * log((real_count * 10) / 20) + 7.7
 func on_swipe_left():
-	if lane >= 0:
-		lane -= 1
-		for soldier in soldiers:
-			var current_position = soldier.target_position if soldier.target_position < 1000 else soldier.position.z
-			soldier.target_position = current_position - lane_size - lane_margin
-			soldier.is_changing_lane = true
+	on_swipe(-1)
 			
 func on_swipe_right():
-	if lane <= 0:
-		lane += 1
+	on_swipe(1)
+			
+func on_swipe(direction: float):
+	if abs(lane + direction) <= 1:
+		lane += direction
+		var leader_position = get_leader_position()
 		for soldier in soldiers:
-			var current_position = soldier.target_position if soldier.target_position < 1000 else soldier.position.z
-			soldier.target_position = current_position + lane_size + lane_margin
+			var current_position = soldier.target_position if soldier.is_changing_lane else soldier.position.z
+			soldier.target_position = current_position + (lane_size + lane_margin) * direction
 			soldier.is_changing_lane = true
+			soldier.is_changing_lane_in = (leader_position - soldier.position.x) / 60
+
+func update_ui():
+	ui_manager.update_text(real_count, soldiers.size())

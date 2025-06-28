@@ -1,11 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://cnt856ws56l5c"]
+[gd_scene load_steps=7 format=3 uid="uid://cnt856ws56l5c"]
 
 [ext_resource type="Script" uid="uid://3xudwx11veg0" path="res://scripts/game_manager.gd" id="1_sb48q"]
 [ext_resource type="PackedScene" uid="uid://xomd5kxtgwb5" path="res://prefabs/road_segment.tscn" id="1_wbfu4"]
 [ext_resource type="Script" uid="uid://dv6vky5tlbhq7" path="res://scripts/soldier_manager.gd" id="2_u44n3"]
+[ext_resource type="Script" uid="uid://s5fgmu5xcmos" path="res://scripts/road_objects.gd" id="4_sb48q"]
+[ext_resource type="Script" uid="uid://drcjhul77hgx2" path="res://scripts/ui_manager.gd" id="5_t88pq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_r0x5m"]
+font_size = 60
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_sb48q")
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("5_t88pq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "30 soldats"
+label_settings = SubResource("LabelSettings_r0x5m")
+horizontal_alignment = 1
 
 [node name="CameraContainer" type="Node3D" parent="."]
 
@@ -22,3 +43,6 @@ transform = Transform3D(0.510063, 0.0153867, -0.86, 0.860137, -0.00912434, 0.509
 
 [node name="Soldiers" type="Node" parent="."]
 script = ExtResource("2_u44n3")
+
+[node name="RoadObjects" type="Node3D" parent="."]
+script = ExtResource("4_sb48q")
