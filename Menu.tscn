@@ -1,10 +1,26 @@
-[gd_scene load_steps=9 format=3 uid="uid://iwof4dsp0u21"]
+[gd_scene load_steps=10 format=3 uid="uid://iwof4dsp0u21"]
 
 [ext_resource type="Texture2D" uid="uid://sdw0m1kbxc5j" path="res://sprites/popup.jpg" id="1_uubjt"]
 [ext_resource type="Script" uid="uid://n2k7m8eu8kjh" path="res://scripts/menu_manager.gd" id="1_ylpcl"]
 [ext_resource type="Texture2D" uid="uid://d3ru2oskbob3j" path="res://sprites/app_store.png" id="2_5yleq"]
 [ext_resource type="Texture2D" uid="uid://cfg2aytyiorsj" path="res://sprites/loading.png" id="4_cx167"]
 [ext_resource type="Texture2D" uid="uid://brkaiskgkwr3j" path="res://sprites/open.png" id="5_dolsu"]
+[ext_resource type="Texture2D" uid="uid://cgued21upd6al" path="res://sprites/godot_icon.png" id="6_n4eug"]
+
+[sub_resource type="Animation" id="Animation_dolsu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_cx167"]
 resource_name = "spin"
@@ -21,21 +37,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, 3.14159, 6.28319]
-}
-
-[sub_resource type="Animation" id="Animation_dolsu"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n4eug"]
@@ -108,6 +109,7 @@ text = "Play"
 
 [node name="AppStore" type="Control" parent="."]
 layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -205,5 +207,35 @@ anchor_bottom = 1.022
 offset_bottom = -0.0120049
 text = "Open"
 
+[node name="FlashScreen" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="FlashScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="FlashScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="FlashScreen/CenterContainer"]
+layout_mode = 2
+texture = ExtResource("6_n4eug")
+
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/MarginContainer/AspectRatioContainer/PanelContainer/Button" to="." method="app_store_pressed"]
 [connection signal="pressed" from="AppStore/TextureRect/ButtonGet" to="." method="on_get_pressed"]
+[connection signal="pressed" from="AppStore/TextureRect/Open/OpenButton" to="." method="on_open_pressed"]
