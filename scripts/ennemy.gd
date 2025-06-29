@@ -1,5 +1,7 @@
 extends Node3D
 
+class_name Ennemy
+
 @onready var game_manager = GameManager.Instance
 @onready var soldier_manager = SoldierManager.Instance
 @onready var camera_container = GameManager.Instance.get_node("CameraContainer")

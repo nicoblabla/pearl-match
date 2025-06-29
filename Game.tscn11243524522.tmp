@@ -1,0 +1,283 @@
+[gd_scene load_steps=25 format=3 uid="uid://cnt856ws56l5c"]
+
+[ext_resource type="Script" uid="uid://3xudwx11veg0" path="res://scripts/game_manager.gd" id="1_sb48q"]
+[ext_resource type="PackedScene" uid="uid://xomd5kxtgwb5" path="res://prefabs/road_segment.tscn" id="1_wbfu4"]
+[ext_resource type="Script" uid="uid://dv6vky5tlbhq7" path="res://scripts/soldier_manager.gd" id="2_u44n3"]
+[ext_resource type="Script" uid="uid://d2vpemji301ap" path="res://addons/post_processing/node/post_process.gd" id="2_yyih5"]
+[ext_resource type="Script" uid="uid://bjrhlhopoiw6h" path="res://addons/post_processing/resource/post_processing_configuration.gd" id="3_qjyg3"]
+[ext_resource type="PackedScene" path="res://prefabs/game_over.tscn" id="3_r0x5m"]
+[ext_resource type="Script" uid="uid://s5fgmu5xcmos" path="res://scripts/road_objects.gd" id="4_sb48q"]
+[ext_resource type="Script" uid="uid://drcjhul77hgx2" path="res://scripts/ui_manager.gd" id="5_t88pq"]
+[ext_resource type="Script" uid="uid://dhfa0rnnx2cgi" path="res://scripts/OffScreenBoundary.gd" id="6_qjyg3"]
+[ext_resource type="Script" uid="uid://dlhwen5x65eru" path="res://scripts/ennemies_manager.gd" id="6_r0x5m"]
+[ext_resource type="Texture2D" uid="uid://dncmrescpqqmu" path="res://sprites/bullet.png" id="6_yhmtn"]
+[ext_resource type="Script" uid="uid://3v0ti4a8u85x" path="res://scripts/enemy_spawn_data.gd" id="7_2vekm"]
+[ext_resource type="PackedScene" uid="uid://8uj0e85p3uro" path="res://models/enemies/salaryman/salaryman.tscn" id="13_lvtmh"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gwjdr"]
+sky_top_color = Color(0.2184, 0.36816, 0.78, 1)
+sky_energy_multiplier = 2.0
+ground_bottom_color = Color(0.64, 0.48832, 0.1344, 1)
+
+[sub_resource type="Sky" id="Sky_lvtmh"]
+sky_material = SubResource("ProceduralSkyMaterial_gwjdr")
+
+[sub_resource type="Environment" id="Environment_yyih5"]
+background_mode = 2
+background_color = Color(1, 1, 1, 1)
+sky = SubResource("Sky_lvtmh")
+ambient_light_source = 3
+ambient_light_color = Color(0.99, 0.54351, 0.3366, 1)
+ambient_light_sky_contribution = 0.14
+reflected_light_source = 2
+tonemap_mode = 4
+tonemap_exposure = 1.5
+ssao_enabled = true
+glow_enabled = true
+glow_bloom = 0.2
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.32894, 0.556562, 0.852368, 1)
+fog_density = 1.0
+fog_depth_curve = 0.757858
+fog_depth_begin = 100.0
+fog_depth_end = 600.0
+adjustment_enabled = true
+adjustment_brightness = 1.05
+adjustment_contrast = 1.09
+adjustment_saturation = 1.35
+
+[sub_resource type="Resource" id="Resource_elkpi"]
+script = ExtResource("3_qjyg3")
+reload = false
+ASCII = false
+ASCIISize = Vector2(4, 9)
+ChromaticAberration = true
+StrenghtCA = 2.0
+Blur = false
+L_O_D = 0.171
+FishEye = false
+FishEyeAspect = 0.205
+FishEyeDistortion = 1.0
+FishEyeRadius = 1.0
+FishEyeAlpha = 1.0
+FishEyeCrop = 1.0
+FishEyeCropColor = Color(0, 0, 0, 1)
+Vignette = true
+VignetteIntensity = 0.4
+VignetteOpacity = 0.5
+VignetteR_G_B = Color(0, 0, 0, 1)
+Glitch = false
+GlitchRange = 0.05
+GlitchNoiseQuality = 250.0
+GlitchIntenity = 0.0088
+GlitchOffset = 0.03
+GlitchColorOffset = 1.3
+Outline = false
+OutlineColor = Color(0, 0, 0, 1)
+OutlineThreshold = 0.379
+OutlineBlend = 0.545
+Grain = false
+GrainPower = 75
+CircularWaves = false
+CircularWavesAmplitude = 2.0
+CircularWavesFrequency = 12.69
+CircularWavesRippleRate = 9.2
+SpeedLines = false
+SpeedLinesColor = Color(0.725108, 0.00644269, 0.392182, 1)
+SpeedLinesCount = 2
+SpeedLineDensity = 0.598
+SpeedLineSpeed = 31
+particle_storm = false
+particle_storm_color = Color(0.87, 0.78, 0.6, 1)
+particle_storm_intensity = 0.5
+particle_storm_chaos = 1.0
+particle_storm_scale = 1.0
+particle_storm_density = 1.0
+particle_storm_wind_direction = Vector2(1, 0.2)
+particle_storm_wind_speed = 1.0
+directional_drift = true
+directional_drift_color = Color(0.76, 0.69, 0.5, 0.3)
+directional_drift_density = 0.146
+directional_drift_speed = 1.0
+directional_drift_scale = 30.0
+directional_drift_direction = Vector2(1, 0.5)
+directional_drift_layer_ratio = 1.2
+ColorCorrection = true
+ColorCorrectionTint = Color(0.849681, 0.916124, 0.988777, 1)
+ColorCorrectionBrightness = 0.08
+ColorCorrectionSaturation = 0.18
+Palette = false
+Pixelate = false
+PixelatePixelSize = 3
+CRT = false
+overlay = false
+scanlines_opacity = 0.4
+scanlines_width = 0.25
+grille_opacity = 0.3
+pixelate = true
+roll_speed = 8.0
+roll_size = 15.0
+roll_variation = 1.8
+distort_intensity = 0.05
+noise_opacity = 0.4
+noise_speed = 5.0
+static_noise_intensity = 0.06
+aberration = 0.03
+brightness = 1.4
+discolor = true
+warp_amount = 1.0
+clip_warp = false
+vignette_intensity = 0.4
+vignette_opacity = 0.5
+AnalogMonitor = false
+AnalogMonitorResolution = Vector2(256, 256)
+ScreenShake = false
+ScreenShakePower = 0.035
+metadata/_custom_type_script = "uid://bjrhlhopoiw6h"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qjyg3"]
+bg_color = Color(0.402991, 0.589874, 0.957269, 1)
+border_width_bottom = 7
+border_color = Color(0.0741309, 0.454979, 0.684446, 1)
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+corner_detail = 9
+
+[sub_resource type="LabelSettings" id="LabelSettings_r0x5m"]
+font_size = 60
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_yyih5"]
+plane = Plane(1, 0, 0, 0)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gwjdr"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 3)
+angle_min = 1.07288e-05
+angle_max = 1.07288e-05
+inherit_velocity_ratio = 1.0
+velocity_pivot = Vector3(1, 1, 0)
+direction = Vector3(2, 0, 0)
+spread = 11.471
+flatness = 1.0
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = -1.60933e-05
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 4.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lvtmh"]
+transparency = 1
+albedo_texture = ExtResource("6_yhmtn")
+
+[sub_resource type="QuadMesh" id="QuadMesh_yyih5"]
+material = SubResource("StandardMaterial3D_lvtmh")
+orientation = 1
+
+[sub_resource type="Resource" id="Resource_yyih5"]
+script = ExtResource("7_2vekm")
+enemy_scene = ExtResource("13_lvtmh")
+spawn_chance = 1.0
+max_health = 200
+metadata/_custom_type_script = "uid://3v0ti4a8u85x"
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_sb48q")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_yyih5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.173648, -0.7813, 0.599513, 0, 0.608761, 0.793353, -0.984808, -0.137764, 0.10571, 0, 1.3832, 0)
+light_color = Color(0.665936, 0.750764, 0.899699, 1)
+light_energy = 2.454
+light_bake_mode = 0
+light_cull_mask = 4294965247
+shadow_enabled = true
+directional_shadow_mode = 0
+directional_shadow_blend_splits = true
+directional_shadow_fade_start = 0.6
+directional_shadow_max_distance = 600.0
+
+[node name="PostProcess" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("2_yyih5")
+configuration = SubResource("Resource_elkpi")
+metadata/_custom_type_script = "uid://d2vpemji301ap"
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("5_t88pq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UI/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qjyg3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/VBoxContainer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "30 soldats"
+label_settings = SubResource("LabelSettings_r0x5m")
+horizontal_alignment = 1
+
+[node name="GameOver" parent="UI" instance=ExtResource("3_r0x5m")]
+visible = false
+
+[node name="CameraContainer" type="Node3D" parent="."]
+
+[node name="Area3D" type="Area3D" parent="CameraContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.155, 38.427, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraContainer/Area3D"]
+shape = SubResource("WorldBoundaryShape3D_yyih5")
+debug_color = Color(0.905384, 0.000132648, 0.746792, 0.42)
+script = ExtResource("6_qjyg3")
+
+[node name="Camera3D" type="Camera3D" parent="CameraContainer"]
+transform = Transform3D(-4.34177e-08, 0.396427, -0.918066, -5.05816e-09, 0.918066, 0.396427, 1, 2.18557e-08, -3.78552e-08, -46.155, 38.427, 0)
+fov = 40.0
+
+[node name="Roads" type="Node" parent="."]
+
+[node name="RoadSegment" parent="Roads" instance=ExtResource("1_wbfu4")]
+
+[node name="Soldiers" type="Node" parent="."]
+script = ExtResource("2_u44n3")
+
+[node name="Particles" type="Node3D" parent="."]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Particles"]
+visible = false
+amount = 200
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_gwjdr")
+draw_pass_1 = SubResource("QuadMesh_yyih5")
+
+[node name="RoadObjects" type="Node3D" parent="."]
+script = ExtResource("4_sb48q")
+
+[node name="Enemies" type="Node3D" parent="."]
+script = ExtResource("6_r0x5m")
+enemy_spawn_data = Array[ExtResource("7_2vekm")]([SubResource("Resource_yyih5")])
+spawn_height_offset = 100.0
+spawn_batch_size = 10
+
+[connection signal="area_entered" from="CameraContainer/Area3D" to="CameraContainer/Area3D/CollisionShape3D" method="_on_area_3d_area_entered"]
+[connection signal="body_entered" from="CameraContainer/Area3D" to="CameraContainer/Area3D/CollisionShape3D" method="_on_area_3d_body_entered"]
