@@ -8,6 +8,8 @@ static var Instance
 @onready var game_manager = GameManager.Instance
 @onready var camera = get_viewport().get_camera_3d()
 @onready var particles: GPUParticles3D = get_tree().get_root().get_node("Game/Particles/GPUParticles3D")
+@onready var die_sound = $FmodDie
+@onready var shoot_sound = $FmodShoot
 
 var soldiers = []
 var lane = 0
@@ -25,7 +27,8 @@ func _init():
 func _ready() -> void:
 	resize(5)
 	update_ui()
-	particles.visible = true
+	particles.visible = false
+	particles.emitting = false
 	
 
 var grid := {}
@@ -159,6 +162,7 @@ func kill(soldier):
 		var ratio = real_count / displayed_soldiers
 		real_count -= floor(ratio)
 	soldier.die()
+	die_sound.play()
 	if real_count <= 0:
 		game_over()
 	update_ui()
@@ -214,9 +218,33 @@ func on_swipe(direction: float):
 			soldier.target_position = current_position + (lane_size + lane_margin) * direction
 			soldier.is_changing_lane = true
 			soldier.is_changing_lane_in = (leader_position - soldier.position.x) / 60
-
+var is_shooting = false
+func start_shooting():
+	if not is_shooting:
+		print("start shooting")
+		particles.visible = true
+		particles.emitting = true
+		shoot_sound.play()
+		is_shooting = true
+	
+func stop_shooting():
+	if is_shooting:
+		print("stop shooting")
+		particles.visible = false
+		particles.emitting = false
+		shoot_sound.stop()
+		is_shooting = false
+	
 func update_ui():
 	ui_manager.update_text(real_count, soldiers.size())
+	var power = 1
+	if real_count > 50:
+		power = 2
+	if real_count > 100:
+		power = 3
+	if real_count > 1000:
+		power = 4
+	game_manager.change_power(power)
 
 var have_already_changed_bullets = false
 func update_particles():

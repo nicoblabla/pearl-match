@@ -189,6 +189,24 @@ metadata/_custom_type_script = "uid://3v0ti4a8u85x"
 [node name="Game" type="Node3D"]
 script = ExtResource("1_sb48q")
 
+[node name="FmodBankLoader" type="FmodBankLoader" parent="."]
+bank_paths = ["res://audio/banks/Master.bank", "res://audio/banks/Master.strings.bank"]
+
+[node name="FmodMusic" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/master_track"
+event_guid = "{1a3ad766-c14d-4cf2-a0e1-640255b6acd7}"
+autoplay = true
+auto_release = true
+fmod_parameters/power/id = -8726027461570934977
+fmod_parameters/power = 1
+fmod_parameters/power/variant_type = 2
+fmod_parameters/firstPowerUp1/id = -1769506941101600724
+fmod_parameters/firstPowerUp1 = 0
+fmod_parameters/firstPowerUp1/variant_type = 2
+fmod_parameters/firstPowerUp2/id = 732807025260017368
+fmod_parameters/firstPowerUp2 = 0
+fmod_parameters/firstPowerUp2/variant_type = 2
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_yyih5")
 
@@ -263,6 +281,13 @@ fov = 40.0
 
 [node name="Soldiers" type="Node" parent="."]
 script = ExtResource("2_u44n3")
+
+[node name="FmodShoot" type="FmodEventEmitter2D" parent="Soldiers"]
+event_name = "event:/mg_sfx"
+event_guid = "{8e7eac58-df1b-47ea-984c-6825f0669a28}"
+volume = 0.5
+
+[node name="FmodDie" type="FmodEventEmitter2D" parent="Soldiers"]
 
 [node name="Particles" type="Node3D" parent="."]
 

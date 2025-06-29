@@ -24,6 +24,16 @@ func _process(delta: float) -> void:
 	if spawn_timer >= spawn_interval:
 		spawn_enemy()
 		spawn_timer = 0.0
+	
+	var is_someone_in_range = false
+	for enemy in get_children():
+		if not enemy.is_dead:
+			if enemy.in_range:
+				is_someone_in_range = true
+	if not is_someone_in_range:
+		soldier_manager.stop_shooting()
+	else:
+		soldier_manager.start_shooting()
 
 func select_random_enemy() -> PackedScene:
 	if enemy_spawn_data.is_empty():

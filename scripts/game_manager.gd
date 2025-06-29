@@ -6,6 +6,7 @@ static var Instance
 @onready var soldier_manager = $Soldiers
 @onready var road_segment_prefab = load("res://prefabs/road_segment.tscn")
 @onready var roads = $Roads
+@onready var music = $FmodMusic
 
 var roadList = []
 var num_segments = 5
@@ -17,7 +18,9 @@ var number_of_kill = 0
 
 func _init():
 	Instance = self
-
+func change_power(power):
+	if music != null:
+		music.set_parameter("power", power)
 func _ready() -> void:
 	GlobalManager.change_state(GlobalManager.GameState.PLAYING)
 	

@@ -14,6 +14,7 @@ var is_dead = false
 var life = 1000.
 var max_life = 1000.
 var is_first_soldier = false # TODO
+var in_range = false
 
 func _ready() -> void:
 	animation.play("running")
@@ -22,6 +23,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if (not is_dead and position.x - camera_container.position.x < 50 and soldier_manager.lane == lane):
 		take_damage(soldier_manager.get_damage())
+		in_range = true
+	else:
+		in_range = false
+
 
 
 func take_damage(damage):
