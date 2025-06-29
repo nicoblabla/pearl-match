@@ -22,6 +22,7 @@ config/icon="res://icon.svg"
 
 GlobalManager="*res://scripts/global_manager.gd"
 AnnoyingAd="*res://annoying_ad.tscn"
+PauseManager="*res://prefabs/pause_manager.tscn"
 
 [display]
 

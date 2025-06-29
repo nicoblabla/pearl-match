@@ -32,7 +32,7 @@ var ad_time_progression : int = 0
 
 var selected_player : VideoStreamPlayer
 
-var random_timer : Timer
+var random_timer : Timer = null
 
 func _init():
 	Instance = self
@@ -46,17 +46,24 @@ func _ready() -> void:
 	# open_random_ad();
 	
 func on_game_state_changed(old_state: GlobalManager.GameState, new_state: GlobalManager.GameState) -> void:
-	print("new state")
+	print("Annoying ad ","new state ", GlobalManager.GameState.keys()[new_state])
 	match new_state:
-		GlobalManager.GameState.PLAYING:
+		GlobalManager.GameState.START:
 			random_timer = Timer.new()
 			add_child(random_timer)
 			random_timer.timeout.connect(open_random_ad)
 			start_random_ad_timer()
 		GlobalManager.GameState.PLAYING:
+			if random_timer == null : 
+				random_timer = Timer.new()
+				add_child(random_timer)
+				random_timer.timeout.connect(open_random_ad)
+				start_random_ad_timer()
 			random_timer.paused = false
+			timer.paused = false
 		GlobalManager.GameState.PAUSED:
 			random_timer.paused = true
+			timer.paused = true
 # 		GlobalManager.GameState.PLAYING:
 # 			if STATE == AdState.PLAYING_AD:
 # 				start_ad()
@@ -97,7 +104,6 @@ func change_state(new_state: AdState) -> void:
 func open_random_ad():
 	canvas_layer.visible = true
 	change_state(AdState.BEFORE_AD)
-	GlobalManager.change_state(GlobalManager.GameState.AD)
 
 
 	time_left = 5
@@ -131,6 +137,7 @@ func _on_timer_timeout() -> void:
 
 			if time_left < 0:
 				change_state(AdState.PLAYING_AD)
+				GlobalManager.change_state(GlobalManager.GameState.AD)
 				start_ad()
 				return
 

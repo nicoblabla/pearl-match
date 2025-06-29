@@ -28,7 +28,7 @@ func _ready() -> void:
 		GlobalManager.game_state_changed.connect(on_game_state_changed)
 	
 func on_game_state_changed(old_state: GlobalManager.GameState, new_state: GlobalManager.GameState) -> void:
-	print("new state")
+	print("Game Manager ","new state ", GlobalManager.GameState.keys()[new_state])
 	match new_state:
 		GlobalManager.GameState.PLAYING:
 			pass
