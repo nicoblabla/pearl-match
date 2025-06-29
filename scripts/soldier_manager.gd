@@ -134,15 +134,9 @@ func resize(count_diff):
 	var count = real_count + count_diff
 	var display_count  = get_display_count(count_diff)
 	if count <= 0:
-		for soldier in soldiers:
-			soldier.queue_free()
-		soldiers.clear()
-		ui_manager.show_game_over()
-		print("game over")
+		game_over()
 	elif count_diff < 0:
-		print("display_count", display_count)
 		print(soldiers.size())
-		print("real_count", real_count)
 		print(count_diff)
 		for i in range(soldiers.size() - 1, (soldiers.size() + count_diff) - 1, -1):
 			if soldiers.size() > 40 || real_count < 50:
@@ -155,11 +149,31 @@ func resize(count_diff):
 		for i in range(count_diff):
 			if soldiers.size() < 100:
 				add_soldier()
-	print("displaycount: " + str(display_count) + " realcount: " + str(real_count))
 	real_count = count
 	update_ui()
 	update_particles()
-
+	
+func kill(soldier):
+	var displayed_soldiers = soldiers.filter(func(s) -> bool:
+		return not s.is_dead
+	).size()
+	if (displayed_soldiers > 0):
+		var ratio = real_count / displayed_soldiers
+		real_count -= floor(ratio)
+	soldier.die()
+	if real_count <= 0:
+		game_over()
+	update_ui()
+	update_particles()
+		
+func get_damage():
+	return real_count
+	
+func game_over():
+	for soldier in soldiers:
+		soldier.queue_free()
+		soldiers.clear()
+		ui_manager.show_game_over()
 var touch_start = Vector2.ZERO
 var min_swipe_distance = 100  # in pixels
 
@@ -209,7 +223,7 @@ func update_ui():
 var have_already_changed_bullets = false
 func update_particles():
 	var material = particles.process_material as ParticleProcessMaterial
-	particles.set_amount(min(real_count, 800))
+	particles.set_amount(max(min(real_count, 800), 100))
 	var scale = get_scaled_value(real_count)
 	material.scale_max = scale
 	material.scale_min = scale

@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://dcred4y03q5pu"]
+[gd_scene load_steps=15 format=3 uid="uid://dcred4y03q5pu"]
 
 [ext_resource type="PackedScene" uid="uid://pnm1gtkfc53w" path="res://models/enemies/tungtungsahur/tung-tung-tung-sahur.fbx" id="1_awyj4"]
+[ext_resource type="Script" uid="uid://cywy04yerlnqj" path="res://scripts/ennemy.gd" id="2_200pe"]
 [ext_resource type="Animation" uid="uid://cu5lav5tghc62" path="res://animations/running.res" id="2_kv42q"]
 [ext_resource type="Animation" uid="uid://kd3s27f6giyt" path="res://animations/impact.res" id="3_cgf6x"]
 [ext_resource type="Animation" uid="uid://df7g7nnsw0bn" path="res://animations/hit.res" id="3_mwg4o"]
@@ -22,8 +23,17 @@ _data = {
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mwg4o"]
 
+[sub_resource type="QuadMesh" id="QuadMesh_200pe"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s0rha"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sxckf"]
+albedo_color = Color(0, 1, 0, 1)
+
 [node name="tung-tung-tung-sahur" groups=["enemy"] instance=ExtResource("1_awyj4")]
 transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, 0, 0, 0)
+script = ExtResource("2_200pe")
 
 [node name="Skeleton3D" parent="." index="0"]
 bones/0/rotation = Quaternion(0.0711792, -0.0192481, 0.0190676, 0.997096)
@@ -60,7 +70,19 @@ libraries = {
 &"": SubResource("AnimationLibrary_d30u6")
 }
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." index="2" groups=["enemy"]]
+[node name="Area3D" type="Area3D" parent="." index="2" groups=["enemy"]]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0" groups=["enemy"]]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0" groups=["enemy"]]
 shape = SubResource("BoxShape3D_mwg4o")
+
+[node name="HealthRed" type="MeshInstance3D" parent="." index="3"]
+transform = Transform3D(0.992431, 0, -7.10543e-15, 0, 0.204989, 0, 3.90799e-14, 0, 1, 1.74094e-08, 1.81266, 0.398282)
+mesh = SubResource("QuadMesh_200pe")
+surface_material_override/0 = SubResource("StandardMaterial3D_s0rha")
+
+[node name="HealthGreen" type="MeshInstance3D" parent="." index="4"]
+transform = Transform3D(0.992431, 0, -7.10543e-15, 0, 0.204989, 0, 2.84217e-14, 0, 1, 1.78564e-08, 1.81266, 0.408507)
+mesh = SubResource("QuadMesh_200pe")
+surface_material_override/0 = SubResource("StandardMaterial3D_sxckf")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

@@ -3,7 +3,7 @@ extends Node3D
 @onready var wall_prefabs = load("res://prefabs/wall.tscn")
 
 func _ready() -> void:
-	var pos_x = 0
+	var pos_x = 200
 	
 	while pos_x < 1000:
 		pos_x += 50 + randf() * 5  # Randomize the position a bit

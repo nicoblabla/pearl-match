@@ -13,6 +13,8 @@ var segment_length = 10 * 20
 
 var state = "READY"
 
+var number_of_kill = 0
+
 func _init():
 	Instance = self
 
@@ -48,3 +50,6 @@ func _process(delta: float) -> void:
 		first_segment.position.x = last_segment.position.x + segment_length
 		roadList.append(first_segment)
 		
+func add_kill():
+	number_of_kill += 1
+	
