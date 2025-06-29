@@ -3,6 +3,7 @@ extends Node3D
 @onready var game_manager = GameManager.Instance
 @onready var soldier_manager = SoldierManager.Instance
 @onready var camera_container = GameManager.Instance.get_node("CameraContainer")
+@onready var animation = $AnimationPlayer
 
 @onready var red = $HealthRed
 @onready var green = $HealthGreen
@@ -12,17 +13,19 @@ var enabled = true
 var is_dead = false
 var life = 100.
 var max_life = 100.
+var is_first_soldier = false # TODO
 
 func _ready() -> void:
+	animation.play("running")
 	update_health_bar()
 	
 func _process(delta: float) -> void:
 	if (not is_dead and position.x - camera_container.position.x < 50 and soldier_manager.lane == lane):
-		print("take damage")
 		take_damage(soldier_manager.get_damage())
 
 
 func take_damage(damage):
+	animation.play("hit")
 	life -= damage
 	if life < 0:
 		die()
