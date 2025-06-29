@@ -20,13 +20,13 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 
 	# Vérifier si le parent existe et appartient au groupe "enemy"
 	if parent != null :
-		if parent.is_in_group("enemy") or parent.is_in_group("wall") or parent.is_in_group("road"):
-			print(parent.name)
+		if parent.is_in_group("enemy") or parent.is_in_group("wall"):
+			print(parent.name, " deleted")
 			# Supprimer le parent
 			parent.queue_free()
-			print("Parent supprimé")
 	else:
-		print("Le parent n'appartient pas au groupe ou n'existe pas")
+		pass
+		#print("Le parent n'appartient pas au groupe ou n'existe pas")
 
 
 func _on_area_3d_area_entered(area: Area3D) -> void:
@@ -37,10 +37,9 @@ func _on_area_3d_area_entered(area: Area3D) -> void:
 
 	# Vérifier si le parent existe et appartient au groupe "enemy"
 	if parent != null :
-		if parent.is_in_group("enemy") or parent.is_in_group("wall") or parent.is_in_group("road"):
-			print(parent.name)
+		if parent.is_in_group("enemy") or parent.is_in_group("wall"):
+			print(parent.name, " deleted")
 			# Supprimer le parent
 			parent.queue_free()
-			print("Parent supprimé")
 	else:
 		print("Le parent n'appartient pas au groupe ou n'existe pas")

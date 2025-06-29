@@ -1,16 +1,24 @@
 extends Node3D
 
 @onready var wall_prefabs = load("res://prefabs/wall.tscn")
+@onready var soldier_manager = SoldierManager.Instance
+
+var all_walls = []
+var pos_x = 100
 
 func _ready() -> void:
-	var pos_x = 200
-	
-	while pos_x < 1000:
-		pos_x += 50 + randf() * 5  # Randomize the position a bit
+	while pos_x < 300:
+		pos_x += 100 + randf() * 50
 		spawn_wall(pos_x)
 	
-
+func _process(delta: float) -> void:
+	if soldier_manager.get_leader_position() > pos_x - 100:
+		pos_x += 100 + randf() * 50
+		spawn_wall(pos_x)
+	
+	
 func spawn_wall(pos_x: float) -> void:
+	print("creating new walls")
 	var wall_effects = generate_triplet()
 	var walls = []
 	for i in range(len(wall_effects)):
@@ -23,6 +31,8 @@ func spawn_wall(pos_x: float) -> void:
 			wall.set_value(effect.y, effect.x)
 	for wall in walls:
 		wall.set_neighbors(walls)
+	if walls.size() > 0:
+		all_walls.append(walls)
 
 func generate_wall_effect() -> Vector2i:
 	var effect_type = weighted_random_choice({
@@ -39,9 +49,10 @@ func generate_wall_effect() -> Vector2i:
 			var value =  randi_range(-30, 30)
 			return Vector2i(value, 0)
 		"mul_only":
-			return Vector2i(0, randi_range(2, 4))
+			return Vector2i(0, randi_range(2, 3))
 		"combined":
-			var value = randi_range(-40, 3) # TODO Random between - soldier size and 3
+			var range_min = soldier_manager.real_count
+			var value = randi_range(-40, 3)
 			var mult = randi_range(2, 5)
 			return Vector2i(value, mult)
 	print("Error: Unknown effect type: ", effect_type)

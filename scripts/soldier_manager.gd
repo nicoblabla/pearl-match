@@ -136,8 +136,6 @@ func resize(count_diff):
 	if count <= 0:
 		game_over()
 	elif count_diff < 0:
-		print(soldiers.size())
-		print(count_diff)
 		for i in range(soldiers.size() - 1, (soldiers.size() + count_diff) - 1, -1):
 			if soldiers.size() > 40 || real_count < 50:
 				var soldier = soldiers[i]

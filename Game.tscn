@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://duajx7uxscl4" path="res://prefabs/game_over.tscn" id="3_r0x5m"]
 [ext_resource type="Script" uid="uid://s5fgmu5xcmos" path="res://scripts/road_objects.gd" id="4_sb48q"]
 [ext_resource type="Script" uid="uid://drcjhul77hgx2" path="res://scripts/ui_manager.gd" id="5_t88pq"]
-[ext_resource type="Script" path="res://scripts/OffScreenBoundary.gd" id="6_qjyg3"]
+[ext_resource type="Script" uid="uid://dhfa0rnnx2cgi" path="res://scripts/OffScreenBoundary.gd" id="6_qjyg3"]
 [ext_resource type="Script" uid="uid://dlhwen5x65eru" path="res://scripts/ennemies_manager.gd" id="6_r0x5m"]
 [ext_resource type="Texture2D" uid="uid://dncmrescpqqmu" path="res://sprites/bullet.png" id="6_yhmtn"]
 [ext_resource type="Script" path="res://scripts/enemy_spawn_data.gd" id="7_2vekm"]
