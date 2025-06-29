@@ -1,0 +1,2 @@
+extends FmodEventEmitter2D
+FmodEventEmitter2D
