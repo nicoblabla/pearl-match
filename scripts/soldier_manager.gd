@@ -5,6 +5,7 @@ static var Instance
 
 @onready var soldier_prefab = load("res://prefabs/soldier.tscn")
 @onready var ui_manager = UIManager.Instance
+@onready var game_manager = GameManager.Instance
 @onready var camera = get_viewport().get_camera_3d()
 @onready var particles: GPUParticles3D = get_tree().get_root().get_node("Game/Particles/GPUParticles3D")
 
@@ -24,12 +25,13 @@ func _init():
 func _ready() -> void:
 	resize(5)
 	update_ui()
+	particles.visible = true
 	
 
 var grid := {}
 
 func _process(delta):
-	if false:
+	if game_manager.state != "PLAYING" and false:
 		return
 	var limit_left = -lane_size / 2 + (lane_size + lane_margin) * lane
 	var limit_right = lane_size / 2 + (lane_size + lane_margin) * lane
@@ -135,6 +137,7 @@ func resize(count_diff):
 		for soldier in soldiers:
 			soldier.queue_free()
 		soldiers.clear()
+		ui_manager.show_game_over()
 		print("game over")
 	elif count_diff < 0:
 		print("display_count", display_count)
