@@ -24,6 +24,7 @@ func _init():
 func _ready() -> void:
 	resize(5)
 	update_ui()
+	particles.visible = true
 	
 
 var grid := {}
@@ -135,6 +136,7 @@ func resize(count_diff):
 		for soldier in soldiers:
 			soldier.queue_free()
 		soldiers.clear()
+		ui_manager.show_game_over()
 		print("game over")
 	elif count_diff < 0:
 		print("display_count", display_count)

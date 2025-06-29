@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://n2k7m8eu8kjh" path="res://scripts/menu_manager.gd" id="1_ylpcl"]
 [ext_resource type="Texture2D" uid="uid://d3ru2oskbob3j" path="res://sprites/app_store.png" id="2_5yleq"]
+[ext_resource type="Texture2D" uid="uid://bxkrbac8ucpdr" path="res://sprites/background.png" id="2_dlksc"]
 [ext_resource type="Texture2D" uid="uid://bv03akoe3eec1" path="res://sprites/popup.png" id="2_n4eug"]
 [ext_resource type="Texture2D" uid="uid://cfg2aytyiorsj" path="res://sprites/loading.png" id="4_cx167"]
 [ext_resource type="Texture2D" uid="uid://brkaiskgkwr3j" path="res://sprites/open.png" id="5_dolsu"]
@@ -82,6 +83,33 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ylpcl")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.054902, 0.027451, 0.141176, 1)
+
+[node name="background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+texture = ExtResource("2_dlksc")
+expand_mode = 5
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.811765)
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -151,6 +179,7 @@ pivot_offset = Vector2(96, -43)
 flat = true
 
 [node name="AppStore" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -260,6 +289,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_hcwhg")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_n8j1b")
 
 [node name="FlashScreen" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
