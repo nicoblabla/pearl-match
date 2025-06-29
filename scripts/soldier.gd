@@ -43,3 +43,4 @@ func change_speed():
 
 func die():
 	is_dead = true
+	animation.play("die")

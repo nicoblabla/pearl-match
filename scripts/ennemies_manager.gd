@@ -4,7 +4,7 @@ extends Node3D
 @export var enemy_spawn_data: Array[EnemySpawnData] = []
 @export var spawn_interval: float = 2.0
 @export var spawn_width: float = 20.0
-@export var spawn_height_offset: float = 5.0
+@export var spawn_height_offset: float = 300
 
 @export_range(1, 10, 1) var spawn_batch_size: int = 1  # Nombre d'ennemis à générer par batch
 

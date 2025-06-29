@@ -27,33 +27,12 @@ func _ready() -> void:
 	update_ui()
 	particles.visible = true
 	
-	GlobalManager.game_state_changed.connect(on_game_state_changed)
-	
-func on_game_state_changed(old_state: GlobalManager.GameState, new_state: GlobalManager.GameState) -> void:
-	print("Soldier manager ","new state ", GlobalManager.GameState.keys()[new_state])
-	match new_state:
-		GlobalManager.GameState.PLAYING:
-			for soldier in soldiers:
-				if soldier.is_dead:
-					pass
-				soldier.freeze = false
-		GlobalManager.GameState.PAUSED, GlobalManager.GameState.AD:
-			print("Im in this code")
-			particles.emitting = false
-			for soldier in soldiers:
-				if soldier.is_dead:
-					pass
-				soldier.freeze = true
 
 var grid := {}
 
 func _process(delta):
 	if game_manager.state != "PLAYING" and false:
 		return
-		
-	if GlobalManager.State != GlobalManager.GameState.PLAYING :
-		return
-				
 	var limit_left = -lane_size / 2 + (lane_size + lane_margin) * lane
 	var limit_right = lane_size / 2 + (lane_size + lane_margin) * lane
 	var leader = get_leader()

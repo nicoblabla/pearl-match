@@ -11,8 +11,8 @@ extends Node3D
 var lane = 0
 var enabled = true
 var is_dead = false
-var life = 100.
-var max_life = 100.
+var life = 1000.
+var max_life = 1000.
 var is_first_soldier = false # TODO
 
 func _ready() -> void:

@@ -160,8 +160,8 @@ velocity_pivot = Vector3(1, 1, 0)
 direction = Vector3(2, 0, 0)
 spread = 11.471
 flatness = 1.0
-initial_velocity_min = 20.0
-initial_velocity_max = 20.0
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
 angular_velocity_min = -1.60933e-05
 angular_velocity_max = -1.60933e-05
 gravity = Vector3(0, 0, 0)
@@ -170,7 +170,11 @@ scale_max = 4.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lvtmh"]
 transparency = 1
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_color = Color(0.734769, 1, 0.995503, 1)
 albedo_texture = ExtResource("6_yhmtn")
+albedo_texture_force_srgb = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_yyih5"]
 material = SubResource("StandardMaterial3D_lvtmh")
@@ -265,7 +269,6 @@ script = ExtResource("2_u44n3")
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Particles"]
 visible = false
 amount = 200
-lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_gwjdr")
 draw_pass_1 = SubResource("QuadMesh_yyih5")
 
@@ -275,7 +278,6 @@ script = ExtResource("4_sb48q")
 [node name="Enemies" type="Node3D" parent="."]
 script = ExtResource("6_r0x5m")
 enemy_spawn_data = Array[ExtResource("7_2vekm")]([SubResource("Resource_yyih5")])
-spawn_height_offset = 100.0
 spawn_batch_size = 10
 
 [connection signal="area_entered" from="CameraContainer/Area3D" to="CameraContainer/Area3D/CollisionShape3D" method="_on_area_3d_area_entered"]

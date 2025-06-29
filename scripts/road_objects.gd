@@ -52,7 +52,16 @@ func generate_wall_effect() -> Vector2i:
 			return Vector2i(0, randi_range(2, 3))
 		"combined":
 			var range_min = soldier_manager.real_count
-			var value = randi_range(-40, 3)
+			# round range min if bigger than 1000 to (3084 -> 3000)
+			if range_min > 100000:
+				range_min = int(range_min / 10000) * 10000
+			elif range_min > 10000:
+				range_min = int(range_min / 1000) * 1000
+			elif range_min > 1000:
+				range_min = int(range_min / 100) * 100
+			else:
+				range_min = int(range_min / 10) * 10
+			var value = randi_range(-range_min, 3)
 			var mult = randi_range(2, 5)
 			return Vector2i(value, mult)
 	print("Error: Unknown effect type: ", effect_type)
