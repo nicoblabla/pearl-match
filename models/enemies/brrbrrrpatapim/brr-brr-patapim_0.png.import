@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://clrk3rqpby3wn"
 path.s3tc="res://.godot/imported/brr-brr-patapim_0.png-bd03595c3eb02ad8468e536f48b2aa47.s3tc.ctex"
+path.etc2="res://.godot/imported/brr-brr-patapim_0.png-bd03595c3eb02ad8468e536f48b2aa47.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://models/enemies/brrbrrrpatapim/brr-brr-patapim_0.png"
-dest_files=["res://.godot/imported/brr-brr-patapim_0.png-bd03595c3eb02ad8468e536f48b2aa47.s3tc.ctex"]
+dest_files=["res://.godot/imported/brr-brr-patapim_0.png-bd03595c3eb02ad8468e536f48b2aa47.s3tc.ctex", "res://.godot/imported/brr-brr-patapim_0.png-bd03595c3eb02ad8468e536f48b2aa47.etc2.ctex"]
 
 [params]
 

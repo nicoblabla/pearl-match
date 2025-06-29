@@ -5,14 +5,14 @@
 [ext_resource type="Script" uid="uid://dv6vky5tlbhq7" path="res://scripts/soldier_manager.gd" id="2_u44n3"]
 [ext_resource type="Script" uid="uid://d2vpemji301ap" path="res://addons/post_processing/node/post_process.gd" id="2_yyih5"]
 [ext_resource type="Script" uid="uid://bjrhlhopoiw6h" path="res://addons/post_processing/resource/post_processing_configuration.gd" id="3_qjyg3"]
-[ext_resource type="PackedScene" path="res://prefabs/game_over.tscn" id="3_r0x5m"]
+[ext_resource type="PackedScene" uid="uid://duajx7uxscl4" path="res://prefabs/game_over.tscn" id="3_r0x5m"]
 [ext_resource type="Script" uid="uid://s5fgmu5xcmos" path="res://scripts/road_objects.gd" id="4_sb48q"]
 [ext_resource type="Script" uid="uid://drcjhul77hgx2" path="res://scripts/ui_manager.gd" id="5_t88pq"]
 [ext_resource type="Script" uid="uid://dhfa0rnnx2cgi" path="res://scripts/OffScreenBoundary.gd" id="6_qjyg3"]
 [ext_resource type="Script" uid="uid://dlhwen5x65eru" path="res://scripts/ennemies_manager.gd" id="6_r0x5m"]
 [ext_resource type="Texture2D" uid="uid://dncmrescpqqmu" path="res://sprites/bullet.png" id="6_yhmtn"]
 [ext_resource type="Script" uid="uid://3v0ti4a8u85x" path="res://scripts/enemy_spawn_data.gd" id="7_2vekm"]
-[ext_resource type="PackedScene" uid="uid://u40eaq2obf0x" path="res://models/enemies/salaryman/salaryman.fbx" id="13_cpsxm"]
+[ext_resource type="PackedScene" uid="uid://u40eaq2obf0x" path="res://models/enemies/salaryman.fbx" id="13_cpsxm"]
 [ext_resource type="Script" uid="uid://cywy04yerlnqj" path="res://scripts/ennemy.gd" id="14_hmewc"]
 [ext_resource type="Animation" uid="uid://1ol8e87cpk0t" path="res://animations/die.res" id="15_7ged1"]
 [ext_resource type="Animation" uid="uid://8k3ls8v37v5c" path="res://animations/dying.res" id="16_0mevm"]
@@ -563,7 +563,6 @@ script = ExtResource("4_sb48q")
 [node name="Enemies" type="Node3D" parent="."]
 script = ExtResource("6_r0x5m")
 enemy_spawn_data = Array[ExtResource("7_2vekm")]([SubResource("Resource_yyih5"), SubResource("Resource_8ktx7"), SubResource("Resource_cpsxm"), SubResource("Resource_hmewc"), SubResource("Resource_7ged1")])
-spawn_height_offset = 300.0
 spawn_batch_size = 10
 
 [connection signal="area_entered" from="CameraContainer/Area3D" to="CameraContainer/Area3D/CollisionShape3D" method="_on_area_3d_area_entered"]
