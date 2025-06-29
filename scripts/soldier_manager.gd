@@ -172,8 +172,13 @@ func game_over():
 		soldier.queue_free()
 		soldiers.clear()
 		ui_manager.show_game_over()
+		
+	AnnoyingAdd.Instance.open_random_ad()
+		
 var touch_start = Vector2.ZERO
 var min_swipe_distance = 100  # in pixels
+
+
 
 func _input(event):
 	if event is InputEventScreenTouch:

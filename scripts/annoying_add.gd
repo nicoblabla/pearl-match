@@ -52,13 +52,13 @@ func on_game_state_changed(old_state: GlobalManager.GameState, new_state: Global
 			random_timer = Timer.new()
 			add_child(random_timer)
 			random_timer.timeout.connect(open_random_ad)
-			start_random_ad_timer()
+			#start_random_ad_timer()
 		GlobalManager.GameState.PLAYING:
 			if random_timer == null : 
 				random_timer = Timer.new()
 				add_child(random_timer)
 				random_timer.timeout.connect(open_random_ad)
-				start_random_ad_timer()
+				#start_random_ad_timer()
 			random_timer.paused = false
 			timer.paused = false
 		GlobalManager.GameState.PAUSED:
@@ -198,7 +198,7 @@ func close_ad() -> void:
 	change_state(AdState.NO_STARTED)
 	canvas_layer.visible = false
 
-	start_random_ad_timer()
+	#start_random_ad_timer()
 	GlobalManager.change_state(GlobalManager.GameState.PLAYING)
 
 
