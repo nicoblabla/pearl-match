@@ -1,5 +1,7 @@
 extends Node3D
+class_name GameManager
 
+static var Instance
 @onready var camera_container = $CameraContainer
 @onready var soldier_manager = $Soldiers
 @onready var road_segment_prefab = load("res://prefabs/road_segment.tscn")
@@ -7,7 +9,12 @@ extends Node3D
 
 var roadList = []
 var num_segments = 5
-var segment_length = 10 * 20 
+var segment_length = 10 * 20
+
+var state = "READY"
+
+func _init():
+	Instance = self
 
 func _ready() -> void:
 	for i in range(num_segments):
@@ -26,3 +33,4 @@ func _process(delta: float) -> void:
 		# Move the segment forward
 		first_segment.position.x = last_segment.position.x + segment_length
 		roadList.append(first_segment)
+		

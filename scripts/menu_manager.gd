@@ -59,7 +59,7 @@ func on_open_pressed() -> void:
 func _on_fake_exit_button_pressed() -> void:
 	var tween = create_tween()
 	tween.tween_property(popupContainer, "scale:x", 0, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	tween.parallel().tween_property(popupContainer, "scale:y", 0, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(popupContainer, "scale:y", 0, 0.05).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	#await get_tree().create_timer(2).timeout
 	tween.chain().tween_interval(1)
 	tween.chain().tween_property(popupContainer, "scale:x", 1, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
