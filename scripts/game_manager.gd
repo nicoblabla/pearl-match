@@ -10,12 +10,26 @@ var num_segments = 5
 var segment_length = 10 * 20 
 
 func _ready() -> void:
+	GlobalManager.change_state(GlobalManager.GameState.PLAYING)
+	
 	for i in range(num_segments):
 		var road = road_segment_prefab.instantiate()
 		road.position.x = i * segment_length
 		roads.add_child(road)
 		roadList.push_back(road)
-
+		
+		GlobalManager.game_state_changed.connect(on_game_state_changed)
+	
+func on_game_state_changed(old_state: GlobalManager.GameState, new_state: GlobalManager.GameState) -> void:
+	print("new state")
+	match new_state:
+		GlobalManager.GameState.PLAYING:
+			pass
+		GlobalManager.GameState.PAUSED:
+			pass
+		GlobalManager.GameState.AD:
+			pass
+			
 func _process(delta: float) -> void:
 	camera_container.position.x = soldier_manager.get_leader_position()
 	if camera_container.position.x > roadList[0].position.x + segment_length * 2:

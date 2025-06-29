@@ -54,6 +54,7 @@ func on_open_pressed() -> void:
 	tween.chain().tween_property(godot_logo, "modulate:a", 0, 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.chain().tween_property(jam_logo, "modulate:a", 1, 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.chain().tween_property(jam_logo, "modulate:a", 0, 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.chain().tween_callback(GlobalManager.start_game)
 
 
 func _on_fake_exit_button_pressed() -> void:

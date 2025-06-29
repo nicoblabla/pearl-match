@@ -31,54 +31,57 @@ grow_vertical = 2
 script = ExtResource("1_e7myw")
 metadata/_edit_use_anchors_ = true
 
-[node name="VideoContainer" type="AspectRatioContainer" parent="."]
-layout_mode = 1
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="VideoContainer" type="AspectRatioContainer" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = 0.000488281
 grow_horizontal = 2
 grow_vertical = 2
 ratio = 0.56
 stretch_mode = 3
 
-[node name="Pub1" type="VideoStreamPlayer" parent="VideoContainer"]
+[node name="Pub1" type="VideoStreamPlayer" parent="CanvasLayer/VideoContainer"]
 layout_mode = 2
 stream = SubResource("VideoStreamTheora_v7lre")
 expand = true
 loop = true
 
-[node name="Pub2" type="VideoStreamPlayer" parent="VideoContainer"]
+[node name="Pub2" type="VideoStreamPlayer" parent="CanvasLayer/VideoContainer"]
 layout_mode = 2
 stream = SubResource("VideoStreamTheora_hpciq")
 expand = true
 loop = true
 
-[node name="Pub3" type="VideoStreamPlayer" parent="VideoContainer"]
+[node name="Pub3" type="VideoStreamPlayer" parent="CanvasLayer/VideoContainer"]
 layout_mode = 2
 stream = SubResource("VideoStreamTheora_8ban8")
 expand = true
 loop = true
 
-[node name="Pub4" type="VideoStreamPlayer" parent="VideoContainer"]
+[node name="Pub4" type="VideoStreamPlayer" parent="CanvasLayer/VideoContainer"]
 layout_mode = 2
 stream = SubResource("VideoStreamTheora_w5nbj")
 expand = true
 loop = true
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
-layout_mode = 1
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -13.0
+offset_top = -12.9995
+offset_bottom = 0.000488281
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/fill = SubResource("StyleBoxFlat_hpciq")
 value = 25.0
 show_percentage = false
 
-[node name="Label" type="Label" parent="ProgressBar"]
+[node name="Label" type="Label" parent="CanvasLayer/ProgressBar"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -96,8 +99,7 @@ text = "Loading your awesome ad"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AdAnnoucement" type="Panel" parent="."]
-layout_mode = 1
+[node name="AdAnnoucement" type="Panel" parent="CanvasLayer"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -105,7 +107,7 @@ offset_left = -207.0
 offset_bottom = 50.0
 grow_horizontal = 0
 
-[node name="Label" type="Label" parent="AdAnnoucement"]
+[node name="Label" type="Label" parent="CanvasLayer/AdAnnoucement"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -120,19 +122,18 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Your ad will start in ..."
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="CanvasLayer"]
 
-[node name="SkipButton" type="Button" parent="."]
-layout_mode = 1
+[node name="SkipButton" type="Button" parent="CanvasLayer"]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -166.0
-offset_top = -86.0
+offset_top = -85.9995
 offset_right = -29.0
-offset_bottom = -44.0
+offset_bottom = -43.9995
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_fonts/font = SubResource("FontVariation_hpciq")
@@ -140,9 +141,9 @@ disabled = true
 text = "Skip >
 "
 
-[connection signal="finished" from="VideoContainer/Pub1" to="." method="_on_pub_finished"]
-[connection signal="finished" from="VideoContainer/Pub2" to="." method="_on_pub_finished"]
-[connection signal="finished" from="VideoContainer/Pub3" to="." method="_on_pub_finished"]
-[connection signal="finished" from="VideoContainer/Pub4" to="." method="_on_pub_finished"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="pressed" from="SkipButton" to="." method="_on_skip_button_pressed"]
+[connection signal="finished" from="CanvasLayer/VideoContainer/Pub1" to="." method="_on_pub_finished"]
+[connection signal="finished" from="CanvasLayer/VideoContainer/Pub2" to="." method="_on_pub_finished"]
+[connection signal="finished" from="CanvasLayer/VideoContainer/Pub3" to="." method="_on_pub_finished"]
+[connection signal="finished" from="CanvasLayer/VideoContainer/Pub4" to="." method="_on_pub_finished"]
+[connection signal="timeout" from="CanvasLayer/Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="CanvasLayer/SkipButton" to="." method="_on_skip_button_pressed"]

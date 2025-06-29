@@ -1,5 +1,7 @@
 extends Control
 
+class_name AnnoyingAdd
+
 enum AdState {
 	NO_STARTED,
 	BEFORE_AD,
@@ -8,30 +10,59 @@ enum AdState {
 	CLOSE_AD
 }
 
+static var Instance
+
 signal ad_state_changed(old_state: AdState, new_state: AdState)
 
 @export var STATE : AdState = AdState.NO_STARTED
 
 @export var video_players : Array[VideoStreamPlayer] = []
 
-@onready var ad_panel : Panel = $AdAnnoucement
-@onready var ad_panel_text : Label = $AdAnnoucement/Label
-@onready var progress_bar : ProgressBar = $ProgressBar
-@onready var progress_label : Label = $ProgressBar/Label
-@onready var skip_button : Button = $SkipButton
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
+@onready var ad_panel : Panel = $CanvasLayer/AdAnnoucement
+@onready var ad_panel_text : Label = $CanvasLayer/AdAnnoucement/Label
+@onready var progress_bar : ProgressBar = $CanvasLayer/ProgressBar
+@onready var progress_label : Label = $CanvasLayer/ProgressBar/Label
+@onready var skip_button : Button = $CanvasLayer/SkipButton
 
-@onready var timer : Timer = $Timer
+@onready var timer : Timer = $CanvasLayer/Timer
 var time_left : int = 0
 var ad_time : int = 10
 var ad_time_progression : int = 0
 
 var selected_player : VideoStreamPlayer
 
+var random_timer : Timer
+
+func _init():
+	Instance = self
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	get_video_players();
-	open_random_ad();
+	canvas_layer.visible = false
+	
+	GlobalManager.game_state_changed.connect(on_game_state_changed)
+	# open_random_ad();
+	
+func on_game_state_changed(old_state: GlobalManager.GameState, new_state: GlobalManager.GameState) -> void:
+	print("new state")
+	match new_state:
+		GlobalManager.GameState.PLAYING:
+			random_timer = Timer.new()
+			add_child(random_timer)
+			random_timer.timeout.connect(open_random_ad)
+			start_random_ad_timer()
+		GlobalManager.GameState.PLAYING:
+			random_timer.paused = false
+		GlobalManager.GameState.PAUSED:
+			random_timer.paused = true
+# 		GlobalManager.GameState.PLAYING:
+# 			if STATE == AdState.PLAYING_AD:
+# 				start_ad()
+# 		GlobalManager.GameState.PAUSED, GlobalManager.GameState.WIN, GlobalManager.GameState.GAME_OVER:
+# 			if STATE == AdState.PLAYING_AD or STATE == AdState.WAITING_TO_SKIP:
+# 				close_ad()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -49,7 +80,7 @@ func _input(event):
 
 # Supposons que VideoContainer est un Node dans la scène
 func get_video_players():
-	var video_container = $VideoContainer
+	var video_container = $CanvasLayer/VideoContainer
 	for child in video_container.get_children():
 		if child is VideoStreamPlayer:
 			video_players.append(child)
@@ -64,8 +95,9 @@ func change_state(new_state: AdState) -> void:
 	ad_state_changed.emit(old_state, new_state)
 
 func open_random_ad():
-	self.visible = true
+	canvas_layer.visible = true
 	change_state(AdState.BEFORE_AD)
+	GlobalManager.change_state(GlobalManager.GameState.AD)
 
 
 	time_left = 5
@@ -157,10 +189,19 @@ func close_ad() -> void:
 	await get_tree().process_frame
 
 	change_state(AdState.NO_STARTED)
-	self.visible = false
+	canvas_layer.visible = false
+
+	start_random_ad_timer()
+	GlobalManager.change_state(GlobalManager.GameState.PLAYING)
 
 
 
 func _on_skip_button_pressed() -> void:
 	if (STATE == AdState.WAITING_TO_SKIP):
 		close_ad()
+
+# Fonction qui démarre un timer qui déclenche de manière aléatoire une pub
+func start_random_ad_timer(min_time: int = 30, max_time: int = 60) -> void:
+	random_timer.wait_time = randi_range(min_time, max_time)
+	random_timer.one_shot = true
+	random_timer.start()
