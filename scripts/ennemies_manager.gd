@@ -35,7 +35,7 @@ func _process(delta: float) -> void:
 	else:
 		soldier_manager.start_shooting()
 
-func select_random_enemy() -> PackedScene:
+func select_random_enemy() -> EnemySpawnData:
 	if enemy_spawn_data.is_empty():
 		return null
 
@@ -51,10 +51,10 @@ func select_random_enemy() -> PackedScene:
 	for data in enemy_spawn_data:
 		current_sum += data.spawn_chance
 		if random_value <= current_sum:
-			return data.enemy_scene
+			return data
 
 	# Fallback au cas où
-	return enemy_spawn_data[0].enemy_scene
+	return enemy_spawn_data[0]
 
 func spawn_enemy() -> void:
 
@@ -64,9 +64,15 @@ func spawn_enemy() -> void:
 	var spawn_lane = [-1, 0, 1].pick_random()
 	var spawn_x = soldier_manager.get_leader_position() + spawn_height_offset
 	for i in range(enemies_to_spawn):
-		var random_scene = select_random_enemy()
-		var enemy_instance = random_scene.instantiate()
+		var random_data = select_random_enemy()
+		var random_scene = random_data.enemy_scene
+		var enemy_instance : Ennemy = random_scene.instantiate()
 		enemy_instance.lane = spawn_lane
+		enemy_instance.max_life = random_data.max_health
+		enemy_instance.life = random_data.max_health
+		enemy_instance.scale.x = random_data.scale
+		enemy_instance.scale.y = random_data.scale
+		enemy_instance.scale.z = random_data.scale
 
 		# Générer une position aléatoire autour d'un cercle
 		var angle = randf() * 2.0 * PI

@@ -29,7 +29,7 @@ DSP/dsp_buffer_count=4
 [application]
 
 config/name="Pearl match"
-run/main_scene="uid://cnt856ws56l5c"
+run/main_scene="uid://dl65jw5rlu0kl"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 boot_splash/show_image=false
 boot_splash/fullsize=false
@@ -64,3 +64,4 @@ road=""
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true

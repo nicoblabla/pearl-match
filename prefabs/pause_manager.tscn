@@ -1,0 +1,107 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5e2o38slx6re"]
+
+[ext_resource type="Script" uid="uid://bbrr0e8y5qjd0" path="res://scripts/pause_manager.gd" id="1_m08fb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j3ou3"]
+bg_color = Color(0.6, 0.6, 0.6, 0.392157)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m08fb"]
+bg_color = Color(1, 0, 0.0166664, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xdw6d"]
+bg_color = Color(0.410716, 0.666309, 0.221298, 1)
+
+[node name="PauseManager" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1_m08fb")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = -1
+anchor_right = 0.0625
+anchor_bottom = 0.0352113
+offset_right = 600.0
+offset_bottom = 1096.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_j3ou3")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -211.0
+offset_right = 320.0
+offset_bottom = -142.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "PAUSE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -103.0
+offset_right = 150.0
+offset_bottom = -72.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_m08fb")
+text = "QUIT GAME ?  :("
+
+[node name="Text" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -50.0
+offset_right = 150.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 32.0
+offset_right = 150.0
+offset_bottom = 332.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResumeButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 482.0
+offset_right = 150.0
+offset_bottom = 513.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_xdw6d")
+text = "Return to game :)"
+
+[connection signal="pressed" from="Panel/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Panel/ResumeButton" to="." method="_on_resume_button_pressed"]

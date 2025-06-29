@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cnt856ws56l5c"]
+[gd_scene load_steps=43 format=3 uid="uid://cnt856ws56l5c"]
 
 [ext_resource type="Script" uid="uid://3xudwx11veg0" path="res://scripts/game_manager.gd" id="1_sb48q"]
 [ext_resource type="PackedScene" uid="uid://xomd5kxtgwb5" path="res://prefabs/road_segment.tscn" id="1_wbfu4"]
@@ -11,8 +11,15 @@
 [ext_resource type="Script" uid="uid://dhfa0rnnx2cgi" path="res://scripts/OffScreenBoundary.gd" id="6_qjyg3"]
 [ext_resource type="Script" uid="uid://dlhwen5x65eru" path="res://scripts/ennemies_manager.gd" id="6_r0x5m"]
 [ext_resource type="Texture2D" uid="uid://dncmrescpqqmu" path="res://sprites/bullet.png" id="6_yhmtn"]
-[ext_resource type="Script" path="res://scripts/enemy_spawn_data.gd" id="7_2vekm"]
-[ext_resource type="PackedScene" uid="uid://8uj0e85p3uro" path="res://models/enemies/salaryman/salaryman.tscn" id="13_lvtmh"]
+[ext_resource type="Script" uid="uid://3v0ti4a8u85x" path="res://scripts/enemy_spawn_data.gd" id="7_2vekm"]
+[ext_resource type="PackedScene" uid="uid://u40eaq2obf0x" path="res://models/enemies/salaryman.fbx" id="13_cpsxm"]
+[ext_resource type="Script" uid="uid://cywy04yerlnqj" path="res://scripts/ennemy.gd" id="14_hmewc"]
+[ext_resource type="Animation" uid="uid://1ol8e87cpk0t" path="res://animations/die.res" id="15_7ged1"]
+[ext_resource type="Animation" uid="uid://8k3ls8v37v5c" path="res://animations/dying.res" id="16_0mevm"]
+[ext_resource type="Animation" uid="uid://kd3s27f6giyt" path="res://animations/impact.res" id="17_w2501"]
+[ext_resource type="Animation" uid="uid://cu5lav5tghc62" path="res://animations/running.res" id="18_jsoai"]
+[ext_resource type="Animation" uid="uid://uofrosq323xn" path="res://animations/slash.res" id="19_bisgb"]
+[ext_resource type="Animation" uid="uid://b1lsj4ayi6x4y" path="res://animations/swiping.res" id="20_y5ctq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gwjdr"]
 sky_top_color = Color(0.2184, 0.36816, 0.78, 1)
@@ -180,10 +187,288 @@ albedo_texture_force_srgb = true
 material = SubResource("StandardMaterial3D_lvtmh")
 orientation = 1
 
+[sub_resource type="Animation" id="Animation_lbbrt"]
+resource_name = "mixamo_com"
+length = 0.0333333
+tracks/0/type = "position_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton3D:mixamorig_Hips")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 7.76824e-06, 2.36788, 0.00130102)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skeleton3D:mixamorig_Hips")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 4.75132e-07, -5.08324e-07, -2.75003e-05, 1)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("Skeleton3D:mixamorig_Spine")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0.00981053, 7.78116e-07, 2.7494e-05, 0.999952)
+tracks/3/type = "rotation_3d"
+tracks/3/imported = true
+tracks/3/enabled = true
+tracks/3/path = NodePath("Skeleton3D:mixamorig_LeftUpLeg")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0.000265903, -0.0141637, -0.999775, 0.0158029)
+tracks/4/type = "rotation_3d"
+tracks/4/imported = true
+tracks/4/enabled = true
+tracks/4/path = NodePath("Skeleton3D:mixamorig_RightUpLeg")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 0.000346365, 0.0212318, 0.999651, 0.0157403)
+tracks/5/type = "rotation_3d"
+tracks/5/imported = true
+tracks/5/enabled = true
+tracks/5/path = NodePath("Skeleton3D:mixamorig_LeftLeg")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = PackedFloat32Array(0, 1, -0.0679141, 0.00259489, -0.0346909, 0.997084)
+tracks/6/type = "rotation_3d"
+tracks/6/imported = true
+tracks/6/enabled = true
+tracks/6/path = NodePath("Skeleton3D:mixamorig_RightLeg")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = PackedFloat32Array(0, 1, -0.076291, -0.00293215, 0.0347465, 0.996476)
+tracks/7/type = "rotation_3d"
+tracks/7/imported = true
+tracks/7/enabled = true
+tracks/7/path = NodePath("Skeleton3D:mixamorig_LeftFoot")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = PackedFloat32Array(0, 1, 0.457467, 0.140044, -0.078583, 0.874606)
+tracks/8/type = "rotation_3d"
+tracks/8/imported = true
+tracks/8/enabled = true
+tracks/8/path = NodePath("Skeleton3D:mixamorig_RightFoot")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = PackedFloat32Array(0, 1, 0.455854, -0.141803, 0.078498, 0.875173)
+tracks/9/type = "rotation_3d"
+tracks/9/imported = true
+tracks/9/enabled = true
+tracks/9/path = NodePath("Skeleton3D:mixamorig_LeftShoulder")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = PackedFloat32Array(0, 1, 0.571832, 0.41711, -0.56808, 0.419896)
+tracks/10/type = "rotation_3d"
+tracks/10/imported = true
+tracks/10/enabled = true
+tracks/10/path = NodePath("Skeleton3D:mixamorig_RightShoulder")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = PackedFloat32Array(0, 1, 0.571579, -0.417297, 0.568347, 0.419693)
+tracks/11/type = "rotation_3d"
+tracks/11/imported = true
+tracks/11/enabled = true
+tracks/11/path = NodePath("Skeleton3D:mixamorig_LeftArm")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = PackedFloat32Array(0, 1, -0.151449, 0.000476246, -0.00341602, 0.988459)
+tracks/12/type = "rotation_3d"
+tracks/12/imported = true
+tracks/12/enabled = true
+tracks/12/path = NodePath("Skeleton3D:mixamorig_RightArm")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = PackedFloat32Array(0, 1, -0.151458, -0.000901005, 0.00301581, 0.988459)
+tracks/13/type = "rotation_3d"
+tracks/13/imported = true
+tracks/13/enabled = true
+tracks/13/path = NodePath("Skeleton3D:mixamorig_LeftForeArm")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = PackedFloat32Array(0, 1, 2.94846e-07, 0.000126241, 3.01269e-07, 1)
+tracks/14/type = "rotation_3d"
+tracks/14/imported = true
+tracks/14/enabled = true
+tracks/14/path = NodePath("Skeleton3D:mixamorig_RightForeArm")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = PackedFloat32Array(0, 1, -2.93478e-07, -0.000139912, 2.94484e-07, 1)
+tracks/15/type = "rotation_3d"
+tracks/15/imported = true
+tracks/15/enabled = true
+tracks/15/path = NodePath("Skeleton3D:mixamorig_LeftHand")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = PackedFloat32Array(0, 1, -6.02585e-05, -0.0153188, -1.26952e-06, 0.999883)
+tracks/16/type = "rotation_3d"
+tracks/16/imported = true
+tracks/16/enabled = true
+tracks/16/path = NodePath("Skeleton3D:mixamorig_RightHand")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = PackedFloat32Array(0, 1, 2.83038e-05, 0.0192545, -8.57676e-07, 0.999815)
+tracks/17/type = "rotation_3d"
+tracks/17/imported = true
+tracks/17/enabled = true
+tracks/17/path = NodePath("Skeleton3D:mixamorig_LeftHandThumb1")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = PackedFloat32Array(0, 1, 0.215788, 0.0886656, 0.237899, 0.942856)
+tracks/18/type = "rotation_3d"
+tracks/18/imported = true
+tracks/18/enabled = true
+tracks/18/path = NodePath("Skeleton3D:mixamorig_LeftHandIndex1")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = PackedFloat32Array(0, 1, 6.06088e-05, -0.000885247, -0.000185739, 1)
+tracks/19/type = "rotation_3d"
+tracks/19/imported = true
+tracks/19/enabled = true
+tracks/19/path = NodePath("Skeleton3D:mixamorig_RightHandThumb1")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = PackedFloat32Array(0, 1, 0.215378, -0.0926816, -0.198127, 0.951718)
+tracks/20/type = "rotation_3d"
+tracks/20/imported = true
+tracks/20/enabled = true
+tracks/20/path = NodePath("Skeleton3D:mixamorig_RightHandIndex1")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = PackedFloat32Array(0, 1, -2.86879e-05, -0.000185356, 0.000111362, 1)
+tracks/21/type = "rotation_3d"
+tracks/21/imported = true
+tracks/21/enabled = true
+tracks/21/path = NodePath("Skeleton3D:mixamorig_LeftHandThumb2")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = PackedFloat32Array(0, 1, 1.98875e-05, -0.000582525, 0.00470232, 0.999989)
+tracks/22/type = "rotation_3d"
+tracks/22/imported = true
+tracks/22/enabled = true
+tracks/22/path = NodePath("Skeleton3D:mixamorig_LeftHandIndex2")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/keys = PackedFloat32Array(0, 1, 2.05147e-07, 2.97933e-06, 0.000432983, 1)
+tracks/23/type = "rotation_3d"
+tracks/23/imported = true
+tracks/23/enabled = true
+tracks/23/path = NodePath("Skeleton3D:mixamorig_RightHandThumb2")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/keys = PackedFloat32Array(0, 1, -1.03862e-05, -0.000147606, -0.0452079, 0.998978)
+tracks/24/type = "rotation_3d"
+tracks/24/imported = true
+tracks/24/enabled = true
+tracks/24/path = NodePath("Skeleton3D:mixamorig_RightHandIndex2")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/keys = PackedFloat32Array(0, 1, 4.33881e-07, 1.55183e-06, 5.86808e-05, 1)
+tracks/25/type = "rotation_3d"
+tracks/25/imported = true
+tracks/25/enabled = true
+tracks/25/path = NodePath("Skeleton3D:mixamorig_LeftHandThumb3")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/keys = PackedFloat32Array(0, 1, 0.000128963, 0.00266285, 0.0770768, 0.997022)
+tracks/26/type = "rotation_3d"
+tracks/26/imported = true
+tracks/26/enabled = true
+tracks/26/path = NodePath("Skeleton3D:mixamorig_LeftHandIndex3")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/keys = PackedFloat32Array(0, 1, -9.97193e-08, -7.04816e-06, -0.000233263, 1)
+tracks/27/type = "rotation_3d"
+tracks/27/imported = true
+tracks/27/enabled = true
+tracks/27/path = NodePath("Skeleton3D:mixamorig_RightHandThumb3")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/keys = PackedFloat32Array(0, 1, -0.000150878, 0.00120048, -0.150455, 0.988616)
+tracks/28/type = "rotation_3d"
+tracks/28/imported = true
+tracks/28/enabled = true
+tracks/28/path = NodePath("Skeleton3D:mixamorig_RightHandIndex3")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/keys = PackedFloat32Array(0, 1, -2.7389e-07, -1.16743e-05, -0.000958085, 1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mno5o"]
+_data = {
+&"die": ExtResource("15_7ged1"),
+&"dying": ExtResource("16_0mevm"),
+&"impact": ExtResource("17_w2501"),
+&"mixamo_com": SubResource("Animation_lbbrt"),
+&"running": ExtResource("18_jsoai"),
+&"slash": ExtResource("19_bisgb"),
+&"swiping": ExtResource("20_y5ctq")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vo3hp"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_5f18k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l3cah"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uhbl0"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="PackedScene" id="PackedScene_w7ht3"]
+_bundled = {
+"base_scene": 0,
+"conn_count": 1,
+"conns": PackedInt32Array(1073741831, 1073741830, 58, 57, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("salaryman", "script", "Skeleton3D", "transform", "bones/0/rotation", "bones/1/rotation", "bones/2/rotation", "bones/3/rotation", "bones/4/rotation", "bones/5/rotation", "bones/7/rotation", "bones/8/rotation", "bones/9/rotation", "bones/10/rotation", "bones/11/rotation", "bones/12/rotation", "bones/13/rotation", "bones/15/rotation", "bones/16/rotation", "bones/17/rotation", "bones/19/rotation", "bones/20/rotation", "bones/21/rotation", "bones/22/rotation", "bones/23/rotation", "bones/24/rotation", "bones/25/rotation", "bones/27/rotation", "bones/28/rotation", "bones/29/rotation", "bones/31/rotation", "bones/32/rotation", "bones/33/rotation", "bones/34/rotation", "bones/36/rotation", "bones/37/rotation", "bones/38/rotation", "bones/39/rotation", "AnimationPlayer", "libraries", "Area3D", "Area3D", "enemy", "CollisionShape3D", "CollisionShape3D", "enemy", "shape", "HealthRed", "MeshInstance3D", "transform", "mesh", "surface_material_override/0", "HealthGreen", "MeshInstance3D", "transform", "mesh", "surface_material_override/0", "_on_area_3d_body_entered", "body_entered"),
+"node_count": 7,
+"node_paths": [NodePath("."), NodePath("."), NodePath("."), NodePath("./Area3D"), NodePath("."), NodePath("."), NodePath("."), NodePath("Area3D")],
+"nodes": PackedInt32Array(-1, -1, 2147483647, 0, -1, 1, 1, 1, 0, 1073741824, -1, 2147483647, 262146, -1, 35, 3, 2, 4, 3, 5, 4, 6, 5, 7, 6, 8, 7, 9, 8, 10, 9, 11, 10, 12, 11, 13, 12, 14, 13, 15, 14, 16, 15, 17, 16, 18, 17, 19, 18, 20, 19, 21, 20, 22, 21, 23, 22, 24, 23, 25, 24, 26, 25, 27, 26, 28, 27, 29, 28, 30, 29, 31, 30, 32, 31, 33, 32, 34, 33, 35, 34, 36, 35, 37, 36, 0, 1073741825, -1, 2147483647, 524326, -1, 1, 39, 37, 0, 1073741826, 0, 41, 786472, -1, 0, 1, 42, 1073741827, 0, 44, 262187, -1, 1, 46, 38, 1, 45, 1073741828, 0, 48, 1048623, -1, 3, 49, 39, 50, 40, 51, 41, 0, 1073741829, 0, 53, 1310772, -1, 3, 54, 42, 55, 43, 56, 44, 0),
+"variants": [ExtResource("13_cpsxm"), ExtResource("14_hmewc"), Transform3D(0.0144682, 0, -0.999895, 0, 1, 0, 0.999895, 0, 0.0144682, 0, 0, 0), Quaternion(0.0711792, -0.0192481, 0.0190676, 0.997096), Quaternion(0.0802899, 0.015683, 0.00783721, 0.996617), Quaternion(0.0787469, 0.0329681, -0.00202041, 0.996347), Quaternion(-0.0245026, 0.0330003, 0.00140577, 0.999154), Quaternion(-0.134824, -0.0283694, -0.0250958, 0.990145), Quaternion(-0.0189979, -0.0330279, -0.012851, 0.999191), Quaternion(0.513001, 0.489228, -0.456783, 0.537434), Quaternion(0.588758, 0.144044, -0.13825, 0.783264), Quaternion(0.00765912, -0.181702, 0.602098, 0.777434), Quaternion(0.142697, 0.00286708, 0.13862, 0.980007), Quaternion(0.171318, 0.235348, 0.27038, 0.917691), Quaternion(0.224828, -0.0384121, -0.274284, 0.934208), Quaternion(0.163661, 0.0237155, -0.425696, 0.889627), Quaternion(0.502297, 0.0765667, 0.135633, 0.850552), Quaternion(0.817569, -0.0101363, 0.0242088, 0.575232), Quaternion(0.530272, 0.0166083, 0.0324522, 0.847043), Quaternion(0.511616, -0.576559, 0.481751, 0.416827), Quaternion(0.413006, 0.0489123, -0.231898, 0.87935), Quaternion(-0.00656376, 0.107388, -0.659916, 0.743596), Quaternion(-0.0132476, -0.0117779, -0.23233, 0.972475), Quaternion(0.17508, -0.235081, -0.273582, 0.916099), Quaternion(0.230325, 0.0357869, 0.286721, 0.929226), Quaternion(0.16839, -0.0229979, 0.400071, 0.900588), Quaternion(0.506564, -0.0769599, -0.130197, 0.848834), Quaternion(0.817323, 0.00977401, -0.0357393, 0.574987), Quaternion(0.530271, -0.0110475, -0.0323592, 0.847138), Quaternion(0.0495685, 0.281912, 0.95504, -0.0772523), Quaternion(-0.820946, -0.00831881, 0.0119847, 0.57082), Quaternion(0.713411, -0.0543951, -0.0708071, 0.695034), Quaternion(0.580491, -0.212659, 0.0386015, 0.785058), Quaternion(-0.0150467, -0.0797062, 0.995443, 0.0501389), Quaternion(-0.342609, -0.0471124, 0.0177538, 0.938128), Quaternion(0.798308, 0.0184429, -0.0379913, 0.600766), Quaternion(0.334598, 0.087417, 0.00453268, 0.938287), {
+&"": SubResource("AnimationLibrary_mno5o")
+}, SubResource("BoxShape3D_vo3hp"), Transform3D(-4.33805e-08, 0, -1, 0, 0.204989, 0, 0.992431, 0, -4.37114e-08, -0.571732, 5.87055, 0.00939694), SubResource("QuadMesh_5f18k"), SubResource("StandardMaterial3D_l3cah"), Transform3D(-4.33805e-08, 0, -1, 0, 0.204989, 0, 0.992431, 0, -4.37114e-08, -0.59438, 5.87055, 0.00734583), SubResource("QuadMesh_5f18k"), SubResource("StandardMaterial3D_uhbl0")],
+"version": 3
+}
+
 [sub_resource type="Resource" id="Resource_yyih5"]
 script = ExtResource("7_2vekm")
-enemy_scene = ExtResource("13_lvtmh")
+enemy_scene = SubResource("PackedScene_w7ht3")
 spawn_chance = 1.0
+max_health = 100.0
+scale = 1.0
+metadata/_custom_type_script = "uid://3v0ti4a8u85x"
+
+[sub_resource type="Resource" id="Resource_8ktx7"]
+script = ExtResource("7_2vekm")
+enemy_scene = SubResource("PackedScene_w7ht3")
+spawn_chance = 0.5
+max_health = 500.0
+scale = 2.0
+metadata/_custom_type_script = "uid://3v0ti4a8u85x"
+
+[sub_resource type="Resource" id="Resource_cpsxm"]
+script = ExtResource("7_2vekm")
+enemy_scene = SubResource("PackedScene_w7ht3")
+spawn_chance = 0.1
+max_health = 1200.0
+scale = 4.0
+metadata/_custom_type_script = "uid://3v0ti4a8u85x"
+
+[sub_resource type="Resource" id="Resource_hmewc"]
+script = ExtResource("7_2vekm")
+enemy_scene = SubResource("PackedScene_w7ht3")
+spawn_chance = 0.05
+max_health = 2500.0
+scale = 6.0
+metadata/_custom_type_script = "uid://3v0ti4a8u85x"
+
+[sub_resource type="Resource" id="Resource_7ged1"]
+script = ExtResource("7_2vekm")
+enemy_scene = SubResource("PackedScene_w7ht3")
+spawn_chance = 0.01
+max_health = 5000.0
+scale = 10.0
 metadata/_custom_type_script = "uid://3v0ti4a8u85x"
 
 [node name="Game" type="Node3D"]
@@ -302,7 +587,7 @@ script = ExtResource("4_sb48q")
 
 [node name="Enemies" type="Node3D" parent="."]
 script = ExtResource("6_r0x5m")
-enemy_spawn_data = Array[ExtResource("7_2vekm")]([SubResource("Resource_yyih5")])
+enemy_spawn_data = Array[ExtResource("7_2vekm")]([SubResource("Resource_yyih5"), SubResource("Resource_8ktx7"), SubResource("Resource_cpsxm"), SubResource("Resource_hmewc"), SubResource("Resource_7ged1")])
 spawn_batch_size = 10
 
 [connection signal="area_entered" from="CameraContainer/Area3D" to="CameraContainer/Area3D/CollisionShape3D" method="_on_area_3d_area_entered"]

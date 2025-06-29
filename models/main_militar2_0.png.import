@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://w3wcea2nlae8"
 path.s3tc="res://.godot/imported/main_militar2_0.png-10bfaa5ae3ab81db413677a53e55de48.s3tc.ctex"
+path.etc2="res://.godot/imported/main_militar2_0.png-10bfaa5ae3ab81db413677a53e55de48.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://models/main_militar2_0.png"
-dest_files=["res://.godot/imported/main_militar2_0.png-10bfaa5ae3ab81db413677a53e55de48.s3tc.ctex"]
+dest_files=["res://.godot/imported/main_militar2_0.png-10bfaa5ae3ab81db413677a53e55de48.s3tc.ctex", "res://.godot/imported/main_militar2_0.png-10bfaa5ae3ab81db413677a53e55de48.etc2.ctex"]
 
 [params]
 
