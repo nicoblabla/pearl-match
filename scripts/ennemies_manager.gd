@@ -51,18 +51,19 @@ func spawn_enemy() -> void:
 	var enemies_to_spawn = randi_range(1, spawn_batch_size)
 
 	# Position aléatoire derrière le haut de l'écran
-	var spawn_z = [-12, 0, 12].pick_random()
+	var spawn_lane = [-1, 0, 1].pick_random()
 	var spawn_x = soldier_manager.get_leader_position() + spawn_height_offset
 	for i in range(enemies_to_spawn):
 		var random_scene = select_random_enemy()
 		var enemy_instance = random_scene.instantiate()
+		enemy_instance.lane = spawn_lane
 
 		# Générer une position aléatoire autour d'un cercle
 		var angle = randf() * 2.0 * PI
 		var radius = randf_range(3.0, 6.0)
 		var offset_x = radius * cos(angle)
 		var offset_z = radius * sin(angle)
-		enemy_instance.position = Vector3(spawn_x + offset_x, 0, spawn_z + offset_z)
+		enemy_instance.position = Vector3(spawn_x + offset_x, 0, spawn_lane * 12 + offset_z)
 	
 		# Ajouter l'ennemi à la scène
 		self.add_child(enemy_instance)
